@@ -40,7 +40,7 @@ const Homepage = () => {
           Top 10 Cryptocurrencies in the world
         </h1>
         <Link to="/cryptocurrencies">Show more</Link>
-        <Cryptocurrencies simplified={true} />
+        <Cryptocurrencies simplified />
       </div>
       <div className="home-heading-container">
         <h1 className="homepage-header">Latest Crypto News</h1>

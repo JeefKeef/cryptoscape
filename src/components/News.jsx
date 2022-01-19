@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import moment from 'moment';
 
 const News = () => {
     return (
@@ -6,6 +8,6 @@ const News = () => {
             News
         </div>
     )
-}
+};
 
-export default News
+export default News;
