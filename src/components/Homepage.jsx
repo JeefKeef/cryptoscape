@@ -6,12 +6,12 @@ import { useGetCryptosQuery } from "../services/cryptoApi";
 import { Cryptocurrencies, News } from ".";
 
 const Homepage = () => {
-  const { data, isFetching } = useGetCryptosQuery(); //create a hook
+  const { data, isFetching } = useGetCryptosQuery(10); //create a hook
   const globalStats = data?.data?.stats;
 
   if (isFetching) return "Loading..."; //prevents undefined from loading webpage
 
-  console.log(data);
+  //console.log(data);
 
   return (
     <>
@@ -40,12 +40,10 @@ const Homepage = () => {
           Top 10 Cryptocurrencies in the world
         </h1>
         <Link to="/cryptocurrencies">Show more</Link>
-        <Cryptocurrencies simplified />
+        <Cryptocurrencies simplified={true} />
       </div>
       <div className="home-heading-container">
-        <h1 className="homepage-header">
-          Latest Crypto News
-        </h1>
+        <h1 className="homepage-header">Latest Crypto News</h1>
         <Link to="/news">Show more</Link>
         <News simplified />
       </div>
