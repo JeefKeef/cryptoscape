@@ -21,10 +21,6 @@ const Cryptocurrencies = ({ simplified }) => {
 
   if (isFetching) return "Loading...";
 
-  // console.log("crypto start");
-  // console.log(cryptos);
-  // console.log("crypto end");
-
   return (
     <>
       {!simplified && (

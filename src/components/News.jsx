@@ -6,6 +6,7 @@ import { Input } from "@material-ui/core";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
+
 const newsDemoImage =
   "http://coinrevolution.com/wp-content/uploads/2020/06/cryptonews.jpg";
 
@@ -71,4 +72,3 @@ const News = ({ simplified }) => {
 };
 
 export default News;
-//1:15

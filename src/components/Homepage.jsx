@@ -46,9 +46,7 @@ const Homepage = () => {
         <Cryptocurrencies simplified />
       </div>
       <div className="home-heading-container">
-        <h1 className="homepage-header">
-          Latest Crypto News
-        </h1>
+        <h1 className="homepage-header">Latest Crypto News</h1>
         <Link to="/news">Show more</Link>
         <News simplified />
       </div>
