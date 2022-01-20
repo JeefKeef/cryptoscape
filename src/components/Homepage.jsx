@@ -10,8 +10,11 @@ const Homepage = () => {
   const globalStats = data?.data?.stats;
 
   if (isFetching) return "Loading..."; //prevents undefined from loading webpage
+  // console.log("homepage start");
 
-  //console.log(data);
+  // console.log(data);
+  // console.log("homepage end");
+
 
   return (
     <>
