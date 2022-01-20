@@ -6,12 +6,15 @@ import { useGetCryptosQuery } from "../services/cryptoApi";
 import { Cryptocurrencies, News } from ".";
 
 const Homepage = () => {
-  const { data, isFetching } = useGetCryptosQuery(); //create a hook
+  const { data, isFetching } = useGetCryptosQuery(10); //create a hook
   const globalStats = data?.data?.stats;
 
   if (isFetching) return "Loading..."; //prevents undefined from loading webpage
+  // console.log("homepage start");
 
-  console.log(data);
+  // console.log(data);
+  // console.log("homepage end");
+
 
   return (
     <>
