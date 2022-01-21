@@ -15,7 +15,9 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { useGetCryptoDetailsQuery } from "../services/cryptoApi";
+import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from "../services/cryptoApi";
+import LineChart from "./LineChart";
+
 import {
   AccountBalanceOutlined,
   AttachMoneyOutlined,
@@ -33,6 +35,7 @@ const CryptoDetails = () => {
   const { coinId } = useParams();
   const [timePeriod, setTimePeriod] = useState("7d");
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
+  const { data: coinHistory } = useGetCryptoHistoryQuery({coinId, timePeriod});
   const cryptoDetails = data?.data?.coin;
 
   if (isFetching) return "Loading...";
@@ -116,6 +119,7 @@ const CryptoDetails = () => {
               <MenuItem value={option}>{option}</MenuItem>
             ))}
           </Select>
+          <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name}/>
         </FormControl>
       </Box>
       <div>
