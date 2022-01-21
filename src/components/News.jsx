@@ -2,10 +2,8 @@ import moment from "moment";
 import React, { useState, useEffect } from "react";
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
 import { useGetCryptosQuery } from "../services/cryptoApi";
-import { Input } from "@material-ui/core";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-
 
 const newsDemoImage =
   "http://coinrevolution.com/wp-content/uploads/2020/06/cryptonews.jpg";
@@ -20,7 +18,7 @@ const News = ({ simplified }) => {
 
   if (isFetching) return "Loading...";
 
-  console.log(cryptoNews);
+  //console.log(cryptoNews);
 
   return (
     <div>
@@ -72,3 +70,4 @@ const News = ({ simplified }) => {
 };
 
 export default News;
+//1:15

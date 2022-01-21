@@ -34,6 +34,7 @@ const Cryptocurrencies = ({ simplified }) => {
 
       <div>
         {cryptos?.map((currency) => (
+          <Link to={`/crypto/${currency.uuid}`}>
           <div>
             <p>{currency.rank}.</p>
             <p>{currency.name}</p>
@@ -42,6 +43,7 @@ const Cryptocurrencies = ({ simplified }) => {
             <p>Market Cap: {millify(currency.marketCap)}</p>
             <p>Daily Change: {millify(currency.change)}%</p>
           </div>
+          </Link>
         ))}
       </div>
     </>
