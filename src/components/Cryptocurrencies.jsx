@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import { Input } from "@material-ui/core";
+import {Card, CardHeader, Avatar, CardContent, Typography, Stack} from '@mui/material';
+
 
 const Cryptocurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100;
@@ -32,20 +34,23 @@ const Cryptocurrencies = ({ simplified }) => {
         </div>
       )}
 
-      <div>
+      <Stack direction="row" spacing={2}>
         {cryptos?.map((currency) => (
           <Link to={`/crypto/${currency.uuid}`}>
-          <div>
-            <p>{currency.rank}.</p>
-            <p>{currency.name}</p>
-            <img className="crypto-icon" src={currency.iconUrl} alt="" />
-            <p>Price: {millify(currency.price)}</p>
-            <p>Market Cap: {millify(currency.marketCap)}</p>
-            <p>Daily Change: {millify(currency.change)}%</p>
-          </div>
+          <Card sx={{maxWidth: 300}}>
+            <CardHeader
+              avatar={<Avatar alt="" src={currency.iconUrl}/>}
+              title={currency.rank + ". " + currency.name}
+              />
+            <CardContent>
+              <Typography variant="body2">Price: {millify(currency.price)}</Typography>
+              <Typography variant="body2">Market Cap: {millify(currency.marketCap)}</Typography>
+              <Typography variant="body2">Daily Change: {millify(currency.change)}%</Typography>
+            </CardContent>
+          </Card>
           </Link>
         ))}
-      </div>
+      </Stack>
     </>
   );
 };

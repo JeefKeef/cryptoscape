@@ -51,10 +51,6 @@ const Navbar = () => {
             <Link to="/cryptocurrencies">Cryptocurrencies</Link>
           </MenuItem>
           <MenuItem className="menu-item">
-            <AccountBalanceOutlined />
-            <Link to="/exchanges">Exchanges</Link>
-          </MenuItem>
-          <MenuItem className="menu-item">
             <NewspaperIcon />
             <Link to="/news">News</Link>
           </MenuItem>

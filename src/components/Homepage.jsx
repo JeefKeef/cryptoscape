@@ -1,9 +1,27 @@
-import React from "react";
+import * as React from "react";
 import millify from "millify"; //used to convert long integers into readable format
-import { List, ListItem } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Box,
+  ListItemIcon,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import { Cryptocurrencies, News } from ".";
+
+import {
+  AccountBalanceOutlined,
+  AttachMoneyOutlined,
+  EqualizerOutlined,
+  StorefrontOutlined,
+} from "@material-ui/icons";
+
+import {
+  StackedLineChartOutlined,
+} from "@mui/icons-material";
 
 const Homepage = () => {
   const { data, isFetching } = useGetCryptosQuery(10); //create a hook
@@ -15,29 +33,109 @@ const Homepage = () => {
   // console.log(data);
   // console.log("homepage end");
 
-
   return (
     <>
-      <div className="home-global-container">
+      <Box className="home-global-container">
         <h1 className="homepage-header">Global Crypto Stats</h1>
         <List>
           <ListItem>
-            Total Cryptocurrencies: {millify(globalStats.totalCoins)}
+            <ListItemIcon>
+              <AttachMoneyOutlined />
+            </ListItemIcon>
+            <ListItemText
+              primary={"Total Cryptocurrencies"}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  ></Typography>
+                  {millify(globalStats.total)}
+                </React.Fragment>
+              }
+            />
           </ListItem>
           <ListItem>
-            Total Exchanges: {millify(globalStats.totalExchanges)}
+            <ListItemIcon>
+              <AccountBalanceOutlined />
+            </ListItemIcon>
+            <ListItemText
+              primary={"Total Exchanges"}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  ></Typography>
+                  {millify(globalStats.totalExchanges)}
+                </React.Fragment>
+              }
+            />
           </ListItem>
           <ListItem>
-            Total Market Cap: {millify(globalStats.totalMarketCap)}
+            <ListItemIcon>
+              <StackedLineChartOutlined />
+            </ListItemIcon>
+            <ListItemText
+              primary={"Total Market Cap"}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  ></Typography>
+                  {millify(globalStats.totalMarketCap)}
+                </React.Fragment>
+              }
+            />
           </ListItem>
           <ListItem>
-            Total 24H Volume: {millify(globalStats.total24hVolume)}
+            <ListItemIcon>
+              <EqualizerOutlined />{" "}
+            </ListItemIcon>
+            <ListItemText
+              primary={"Total 24h Volume"}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  ></Typography>
+                  {millify(globalStats.total24hVolume)}
+                </React.Fragment>
+              }
+            />
           </ListItem>
+
           <ListItem>
-            Total Markets: {millify(globalStats.totalMarkets)}
+            <ListItemIcon>
+              <StorefrontOutlined />{" "}
+            </ListItemIcon>
+            <ListItemText
+              primary={"Total Market"}
+              secondary={
+                <React.Fragment>
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="body2"
+                    color="text.primary"
+                  ></Typography>
+                  {millify(globalStats.totalMarkets)}
+                </React.Fragment>
+              }
+            />
           </ListItem>
         </List>
-      </div>
+      </Box>
       <div className="home-heading-container">
         <h1 className="homepage-header">
           Top 10 Cryptocurrencies in the world

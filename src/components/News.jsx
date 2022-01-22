@@ -3,13 +3,21 @@ import React, { useState, useEffect } from "react";
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
 import { useGetCryptosQuery } from "../services/cryptoApi";
 import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
+import {
+  TextField,
+  Stack,
+  Card,
+  CardContent,
+  Avatar,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 
 const newsDemoImage =
   "http://coinrevolution.com/wp-content/uploads/2020/06/cryptonews.jpg";
 
 const News = ({ simplified }) => {
-  const [newsCategory, setNewsCategory] = useState('Cryptocurrency');
+  const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
   const { data: cryptoList } = useGetCryptosQuery(100);
   const { data: cryptoNews, isFetching } = useGetCryptoNewsQuery({
     newsCategory,
@@ -32,39 +40,47 @@ const News = ({ simplified }) => {
               renderInput={(params) => (
                 <TextField {...params} label="Cryptocurrencies" />
               )}
-              onChange={(currency) => setNewsCategory(currency.target.innerText)}
+              onChange={(currency) =>
+                setNewsCategory(currency.target.innerText)
+              }
             />
           </div>
         )}
       </div>
-      {cryptoNews?.value.map((news) => (
-        <div>
-          <a href={news?.url} target="_blank" rel="noreferrer">
-            <div>
-              <h1>{news?.name}</h1>
-              <img
-                src={news?.image?.thumbnail?.contentUrl || newsDemoImage}
-                alt="news"
-              />
-            </div>
-            <p>
-              {news?.description > 100
-                ? `${news.description.substring(0, 100)}...`
-                : news.description}
-            </p>
-            <div>
-              <div>
-                <img
+
+      <Stack direction="row" spacing={2}>
+        {cryptoNews?.value.map((news) => (
+          <Card sx={{ maxWidth: 300 }}>
+            <a href={news?.url} target="_blank" rel="noreferrer">
+              <CardContent>
+                <div>
+                  <img
+                    src={news?.image?.thumbnail?.contentUrl || newsDemoImage}
+                    alt="news"
+                  ></img>
+                  <Typography variant="subtitle1">{news?.name}</Typography>
+                </div>
+              </CardContent>
+              <CardContent>
+                <Typography variant="subtitle2">
+                  {news?.description.length > 50
+                    ? `${news.description.substring(0, 50)}...`
+                    : news.description}
+                </Typography>
+              </CardContent>
+              <CardContent className="news-provider-container">
+                <Avatar
                   src={news?.provider[0]?.image?.thumbnail?.contentUrl}
-                  alt=""
+                  alt={news?.provider[0]?.name}
                 />
-                <h6>{news?.provider[0]?.name}</h6>
-              </div>
-              <h6>{moment(news?.datePublished).startOf("ss").fromNow()}</h6>
-            </div>
-          </a>
-        </div>
-      ))}
+                <Typography variant="subtitle2">
+                  {moment(news?.datePublished).startOf("ss").fromNow()}
+                </Typography>
+              </CardContent>
+            </a>
+          </Card>
+        ))}
+      </Stack>
     </div>
   );
 };
