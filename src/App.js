@@ -7,7 +7,9 @@ import {
   CryptoDetails,
   Cryptocurrencies,
   News,
+  Login,
 } from "./components";
+
 import "./App.css";
 
 const App = () => {
@@ -23,12 +25,13 @@ const App = () => {
             <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
             <Route path="/crypto/:coinId" element={<CryptoDetails />} />
             <Route path="/news" element={<News />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
       </div>
       <div className="footer">
-          Cryptoscape <br />
-        </div>
+        Cryptoscape <br />
+      </div>
     </div>
   );
 };

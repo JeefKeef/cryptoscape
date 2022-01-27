@@ -4,3 +4,4 @@ export { default as CryptoDetails } from './CryptoDetails';
 export { default as News } from './News';
 export { default as Homepage } from './Homepage';
 export { default as LineChart } from './LineChart';
+export { default as Login } from './Login';
