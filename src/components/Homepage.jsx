@@ -1,4 +1,5 @@
 import * as React from "react";
+import "./home/home.css";
 import millify from "millify"; //used to convert long integers into readable format
 import {
   List,
@@ -10,7 +11,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useGetCryptosQuery } from "../services/cryptoApi";
-import { Cryptocurrencies, News } from ".";
+import { Cryptocurrencies, News, Sidebar, Feed, Watchlist } from ".";
 
 import {
   AccountBalanceOutlined,

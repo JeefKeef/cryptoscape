@@ -1,0 +1,6 @@
+.sidebar-container {
+    flex: 2;
+    background-color: blue;
+    overflow-y: scroll;
+    height: 80%;
+}

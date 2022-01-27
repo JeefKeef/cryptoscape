@@ -1,3 +1,5 @@
+import "./App.css";
+
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
@@ -8,15 +10,22 @@ import {
   Cryptocurrencies,
   News,
   Login,
+  Sidebar,
+  Feed,
 } from "./components";
 
-import "./App.css";
+import Watchlist from "./components/watchlist/Watchlist";
 
 const App = () => {
   return (
     <div className="app">
       <div className="navbar">
         <Navbar />
+      </div>
+      <div className="homeContainer">
+        <Watchlist/>
+        <Feed/>
+        <Sidebar/>
       </div>
       <div className="main">
         <div className="routes">

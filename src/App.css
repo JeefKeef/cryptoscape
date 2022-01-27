@@ -29,6 +29,16 @@ body { margin: 0; padding: 0; }
     height: 60px;
 }
 
+.homeContainer {
+    display: flex;
+    width: 70%;
+    height: 100vh;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+
 .menu-container {
     display: flex;
     width: 100%;
