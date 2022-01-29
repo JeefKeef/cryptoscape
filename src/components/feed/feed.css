@@ -3,6 +3,7 @@
     background-color: green;
     overflow-y: scroll;
     height: 100vh;
+    margin: 20px;
 }
 
 ::-webkit-scrollbar {

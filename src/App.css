@@ -29,12 +29,17 @@ body { margin: 0; padding: 0; }
     height: 60px;
 }
 
+.cryptoContainer {
+    width: 100%;
+}
+
 .homeContainer {
     display: flex;
     width: 70%;
     height: 100vh;
     text-align: center;
     margin: 0 auto;
+    padding: 10px;
 }
 
 

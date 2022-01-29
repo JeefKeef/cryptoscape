@@ -3,6 +3,7 @@
     flex: 1.5;
     overflow-y: scroll;
     height: 50%;
+    margin: 20px;
 }
 
 ::-webkit-scrollbar {

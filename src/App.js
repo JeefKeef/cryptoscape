@@ -22,6 +22,9 @@ const App = () => {
       <div className="navbar">
         <Navbar />
       </div>
+      <div className="cryptoContainer">
+        <Cryptocurrencies simplified/>
+      </div>
       <div className="homeContainer">
         <Watchlist/>
         <Feed/>
@@ -37,9 +40,6 @@ const App = () => {
             <Route path="/login" element={<Login />} />
           </Routes>
         </div>
-      </div>
-      <div className="footer">
-        Cryptoscape <br />
       </div>
     </div>
   );
