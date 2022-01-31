@@ -1,10 +1,19 @@
 import "./post.css";
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, Typography, Button } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 
-const Post = () => {
+const Post = ({post}) => {
+
+  const [like, setLike] = useState(3);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const likedHandler = () => {
+    setLike(isLiked ? like-1 : like+1);
+    setIsLiked(!isLiked);
+  }
+
   return (
     <div className="post-container">
       <div className="post-wrapper">
@@ -34,9 +43,9 @@ const Post = () => {
               <AddCommentIcon/>
               <span className="post-comment-counter">9</span>
             </Button>
-            <Button className="post-like-btn">
+            <Button className="post-like-btn"  onClick={likedHandler}>
               <ThumbUpIcon />
-              <span className="post-like-counter">31</span>
+              <span className="post-like-counter">{like}</span>
             </Button>
           </div>
         </div>
