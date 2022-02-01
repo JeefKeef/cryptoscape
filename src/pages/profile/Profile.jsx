@@ -7,7 +7,7 @@ const Profile = () => {
     <>
       <Navbar />
       <div className="profile-home">
-          <WatchList/>
+          <WatchList options={{value:"profile"}}/>
           <Feed options={{value:"profile"}}/>
           <Sidebar/>
       </div>

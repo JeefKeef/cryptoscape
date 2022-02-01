@@ -9,17 +9,16 @@ import {
   CryptoDetails,
   Cryptocurrencies,
   News,
-  Login,
   Sidebar,
   Feed,
   WatchList
 } from "./components";
 
-import {LoginPage, Profile} from "./pages";
+import {LoginPage, Profile, Login} from "./pages";
 
 const App = () => {
   return (
-    <Profile/>
+    <Login/>
     // <div className="app">
     //   <div className="navbar">
     //     <Navbar />
