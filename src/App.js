@@ -14,11 +14,11 @@ import {
   WatchList
 } from "./components";
 
-import {LoginPage, Profile, Login} from "./pages";
+import {LoginPage, Profile, Login, Register} from "./pages";
 
 const App = () => {
   return (
-    <Login/>
+    <Register/>
     // <div className="app">
     //   <div className="navbar">
     //     <Navbar />

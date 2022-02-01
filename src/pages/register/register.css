@@ -1,11 +1,11 @@
-.login-btn-container {
+.register-btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
 }
 
-.login-btn {
+.register-btn {
     font-size: 18px;
     font-weight: bold;
     width: 80%;
