@@ -4,7 +4,11 @@ import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
 import {
-  Navbar,
+  Navbar
+} from "./components";
+
+import {
+  //Navbar,
   Homepage,
   CryptoDetails,
   Cryptocurrencies,
@@ -18,7 +22,7 @@ import {LoginPage, Profile, Login, Register} from "./pages";
 
 const App = () => {
   return (
-    <Register/>
+    <Navbar options={{value: "guest"}}/>
     // <div className="app">
     //   <div className="navbar">
     //     <Navbar />
