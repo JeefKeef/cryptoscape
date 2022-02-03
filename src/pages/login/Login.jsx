@@ -1,5 +1,7 @@
 import "./login.css";
-import React from "react";
+import { loginCall } from "../../apiCalls";
+import { AuthContext } from "../../context/AuthContext";
+import React, { useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import {
   Box,
@@ -24,36 +26,39 @@ const style = {
 };
 
 const Login = () => {
+
+  const username = useRef();
+  const password = useRef();
+  const { user, isFetching, error, dispatch } = useContext(AuthContext);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    loginCall({username:username.current.value, password:password.current.value}, dispatch);
+    // loginCall({username:username.current.value, password:password.current.value}, dispatch);
+  };
+
+  console.log(user);
+
   return (
-    <div>
-      <Box component="form" noValidate sx={style}>
+    <div className="login-page-container">
+      <form className="login-page-form" onSubmit={handleLogin}>
         <div>
-          <TextField
-            label="Username"
-            margin="normal"
+          <input
+            placeholder="Username"
             required
-            fullWidth
-            variant="outlined"
-            name="username"
-            autoComplete="username"
+            type="username"
+            className="login-page-username-input"
+            ref={username}
           />
-          <TextField
-            id="password"
+          <input
+            placeholder="Password"
+            required
             type="password"
-            margin="normal"
-            required
-            fullWidth
-            label="Password"
-            variant="outlined"
-            name="password"
-            autoComplete="current-password"
+            className="login-page-password-input"
+            ref={password}
           />
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
           <div className="login-btn-container">
-            <button className="login-btn" type="submit">Log In</button>
+            <button className="login-btn" type="submit" >Log In</button>
             {/* <Button>Register</Button> */}
           </div>
           <div className="login-signup-container">
@@ -62,7 +67,7 @@ const Login = () => {
             </Link>
           </div>
         </div>
-      </Box>
+      </form>
     </div>
   );
 };

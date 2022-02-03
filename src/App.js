@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //import { Routes, Route, Link } from "react-router-dom";
 
 import { Navbar } from "./components";
@@ -20,12 +20,14 @@ import { LoginPage, Profile, Login, Register, Home } from "./pages";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/profile/:username" element={<Profile />} />
-    </Routes>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile/:username" element={<Profile />} />
+      </Routes>
+    </Router>
 
     // <div className="app">
     //   <div className="navbar">
