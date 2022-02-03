@@ -15,8 +15,14 @@
     align-items: center;
 }
 
-.post-avatar {
+.post-avatar-container {
     padding: 7px;
+}
+
+.post-avatar {
+    width: 30px;
+    height: 30px;
+    border: 50%;
 }
 
 .post-user-name {

@@ -71,11 +71,11 @@ const Navbar = ({ options }) => {
             <Search className="menu-search-icon" />
             <input placeholder="Search for people" className="searchInput" />
           </MenuItem>
-          <MenuItem className="menu-item-">
-            <Link to="/login">Login</Link>
+          <MenuItem className="menu-item">
+            <Link to="/login">Log In</Link>
           </MenuItem>
-          <MenuItem className="menu-item-">
-            <Link to="/login">Sign Up</Link>
+          <MenuItem className="menu-item">
+            <Link to="/register">Sign Up</Link>
           </MenuItem>
         </div>
       </>

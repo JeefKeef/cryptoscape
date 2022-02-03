@@ -1,11 +1,9 @@
 import "./App.css";
-
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+//import { Routes, Route, Link } from "react-router-dom";
 
-import {
-  Navbar
-} from "./components";
+import { Navbar } from "./components";
 
 import {
   //Navbar,
@@ -15,14 +13,20 @@ import {
   News,
   Sidebar,
   Feed,
-  WatchList
+  WatchList,
 } from "./components";
 
-import {LoginPage, Profile, Login, Register} from "./pages";
+import { LoginPage, Profile, Login, Register, Home } from "./pages";
 
 const App = () => {
   return (
-    <Navbar options={{value: "guest"}}/>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/profile/:username" element={<Profile />} />
+    </Routes>
+
     // <div className="app">
     //   <div className="navbar">
     //     <Navbar />

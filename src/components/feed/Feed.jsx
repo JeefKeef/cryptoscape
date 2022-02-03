@@ -1,10 +1,23 @@
 import "./feed.css";
-import React from "react";
-import { Share, Post } from "../";
+import React, { useState, useEffect } from "react";
+import { Share, Post, Profileinfo } from "../";
 import News from "../News";
 import { Avatar, Button } from "@material-ui/core";
+import axios from "axios";
 
 const Feed = ({ options }) => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const res = options.username ? await axios.get("/posts/profile/" + options.username)
+      : await axios.get("/posts/timeline/61f0374aaa40dfb8a0f4c7e7");
+      setPosts(res.data);
+      console.log(res.data);
+    };
+    fetchPosts();
+  }, [options]);
+
   const renderSwitch = (params) => {
     switch (params) {
       case "home":
@@ -21,34 +34,10 @@ const Feed = ({ options }) => {
   const ProfileFeed = () => {
     return (
       <>
-        <div className="profile-info-container">
-          <div className="profile-info-top">
-            <div className="profile-avatar-container">
-              <img
-                className="profile-avatar"
-                src="https://vgraphs.com/images/agents/sage-avatar.jpg"
-                alt=""
-              ></img>
-            </div>
-            <div className="profile-name-container">
-              <div className="profile-name">jeef</div>
-              <Button>Follow</Button>
-            </div>
-          </div>
-          <div className="profile-info-middle">
-            <div className="profile-about-text">About</div>
-            <div className="profile-bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates consequuntur doloremque deserunt et. Corrupti iste rem quisquam itaque magni similique cupiditate, omnis voluptate maiores, soluta tenetur amet sint atque recusandae?</div>
-          </div>
-          <div className="profile-info-bottom">
-            <div className="profile-info">following: 31</div>
-            <div className="profile-info">followers: 69</div>
-          </div>
-        </div>
-
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        <Profileinfo />
+        {posts?.map((post) => (
+          <Post key={post._id} post={post} />
+        ))}
       </>
     );
   };
@@ -57,10 +46,9 @@ const Feed = ({ options }) => {
     return (
       <>
         <Share />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        {posts?.map((post) => (
+          <Post key={post._id} post={post} />
+        ))}
       </>
     );
   };

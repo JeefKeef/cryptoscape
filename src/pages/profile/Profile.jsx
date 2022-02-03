@@ -5,9 +5,9 @@ import { Feed, Navbar, Sidebar, WatchList } from "../../components";
 const Profile = () => {
   return (
     <>
-      <Navbar />
+      <Navbar options={{value:"guest"}}/>
       <div className="profile-home">
-          <WatchList options={{value:"profile"}}/>
+          <WatchList options={{value:"guest"}}/>
           <Feed options={{value:"profile"}}/>
           <Sidebar/>
       </div>
