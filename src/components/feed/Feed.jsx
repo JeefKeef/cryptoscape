@@ -7,16 +7,22 @@ import axios from "axios";
 
 const Feed = ({ options }) => {
   const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const fetchPosts = async () => {
       const res = options.username ? await axios.get("/posts/profile/" + options.username)
       : await axios.get("/posts/timeline/61f0374aaa40dfb8a0f4c7e7");
       setPosts(res.data);
-      console.log(res.data);
     };
+    const fetchUser = async () => {
+      const res = await axios.get(`/users?username=${options.username}`);
+      setUser(res.data);
+    };
+    fetchUser();
     fetchPosts();
-  }, [options]);
+  }, [options.username]);
+
 
   const renderSwitch = (params) => {
     switch (params) {
@@ -34,7 +40,7 @@ const Feed = ({ options }) => {
   const ProfileFeed = () => {
     return (
       <>
-        <Profileinfo />
+        <Profileinfo profile={user}/>
         {posts?.map((post) => (
           <Post key={post._id} post={post} />
         ))}

@@ -2,34 +2,32 @@ import "./profileinfo.css";
 import React from "react";
 import { Button } from "@material-ui/core";
 
-const Profileinfo = () => {
+const Profileinfo = ({profile}) => {
   return (
     <div className="profile-info-container">
       <div className="profile-info-top">
         <div className="profile-avatar-container">
           <img
             className="profile-avatar"
-            src="https://vgraphs.com/images/agents/sage-avatar.jpg"
+            src={profile.profilePicture ||
+              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"}
             alt=""
           ></img>
         </div>
         <div className="profile-name-container">
-          <div className="profile-name">jeef</div>
+          <div className="profile-name">{profile.username}</div>
           <Button>Follow</Button>
         </div>
       </div>
       <div className="profile-info-middle">
         <div className="profile-about-text">About</div>
         <div className="profile-bio">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-          consequuntur doloremque deserunt et. Corrupti iste rem quisquam itaque
-          magni similique cupiditate, omnis voluptate maiores, soluta tenetur
-          amet sint atque recusandae?
+          {profile?.desc}
         </div>
       </div>
       <div className="profile-info-bottom">
-        <div className="profile-info">following: 31</div>
-        <div className="profile-info">followers: 69</div>
+        <div className="profile-info">following: {profile?.followings?.length}</div>
+        <div className="profile-info">followers: {profile?.followers?.length}</div>
       </div>
     </div>
   );

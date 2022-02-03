@@ -2,14 +2,33 @@ import "./sidebar.css";
 import { News } from "../";
 import React from "react";
 
-const Sidebar = () => {
+const Sidebar = ({ options }) => {
+
+  const NewsSidebar = () => {
+    return (
+      <>
+        <News simplified />
+        <div className="footer">
+          Cryptoscape <br />
+        </div>
+      </>
+    );
+  };
+
+  const NoSidebar = () => {
+    return (
+      <>
+        <div className="footer">
+          Cryptoscape <br />
+        </div>
+      </>
+    );
+  };
+
   return (
     <div className="sidebar-container">
       <div className="sidebar-wrapper">
-          <News simplified />
-        <div className="footer">
-        Cryptoscape <br />
-      </div>
+        {options.user ? <NewsSidebar/> : <NoSidebar/>}
       </div>
     </div>
   );
