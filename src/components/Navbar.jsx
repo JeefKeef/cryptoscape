@@ -8,7 +8,8 @@ import {
   HomeOutlined,
   ReorderOutlined,
 } from "@material-ui/icons";
-import { MenuItem, Avatar, Button } from "@mui/material";
+import { MenuItem, Avatar, Button, Input } from "@mui/material";
+import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 
@@ -53,6 +54,31 @@ const Navbar = () => {
           <MenuItem className="menu-item">
             <NewspaperIcon />
             <Link to="/news">News</Link>
+          </MenuItem>
+          <MenuItem className="menu-item">
+            <Search className="menu-search-icon"/>
+            <input placeholder="Search for friend" className="searchInput"/>
+          </MenuItem>
+          <MenuItem className="menu-item">
+          <Link to="/news">Timeline</Link>
+          </MenuItem>
+          <MenuItem className="menu-item">
+            <Person/>
+            <span className="navbar-person-badge">1</span>
+          </MenuItem>
+          <MenuItem className="menu-item">
+            <Chat/>
+            <span className="navbar-chat-badge">21</span>
+          </MenuItem>
+          <MenuItem className="menu-item">
+            <Notifications/>
+            <span className="navbar-notification-badge">3</span>
+          </MenuItem>
+          <MenuItem className="menu-item-">
+            <Link to="/login">Login</Link>
+          </MenuItem>
+          <MenuItem className="menu-item">
+            <Avatar>J</Avatar>
           </MenuItem>
         </div>
       )}

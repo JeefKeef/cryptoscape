@@ -1,0 +1,43 @@
+.share-container {
+    width: 95%;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    margin: 0 auto;
+}
+
+.share-wrapper {
+    padding: 10px;
+}
+
+.share-top {
+    display: flex;
+    align-items: center;
+}
+
+.share-profile-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+.share-input {
+    border: none;
+    width: 80%;
+    height: 100px;
+}
+
+.share-input:focus {
+    outline: none;
+}
+
+.share-bottom {
+    display: flex;
+    align-items: center;
+}
+
+.share-options {
+    padding: 7px;
+    flex-direction: row;
+}

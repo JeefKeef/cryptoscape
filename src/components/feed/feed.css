@@ -1,0 +1,65 @@
+.feed-container {
+    flex: 2;
+    background-color: green;
+    overflow-y: scroll;
+    height: 100vh;
+    margin: 20px;
+}
+
+.profile-info-container {
+    background-color: blue;
+    padding: 7px;
+}
+
+.profile-info-top {
+    display: flex;
+}
+
+.profile-avatar {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.profile-name-container {
+    text-align: center;
+    justify-content: center;
+    align-items:flex-end;
+    margin: 10px;
+}
+
+.profile-name {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.profile-info-middle {
+    padding: 7px;
+
+}
+
+.profile-about-text {
+    font-weight: bold;
+}
+
+.profile-info-bottom {
+    display: flex;
+    font-size: 16px;
+    padding: 7px;
+}
+
+.profile-info {
+    margin-right: 7px;
+}
+
+::-webkit-scrollbar {
+    width:5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: silver;
+}

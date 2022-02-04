@@ -1,0 +1,14 @@
+.sidebar-container {
+    flex: 1.5;
+    background-color: blue;
+    overflow-y: scroll;
+    height: 80%;
+    margin: 20px;
+}
+
+.sidebar-wrapper {
+    padding: 7px;
+}
+
+.sidebar-news-container {
+}

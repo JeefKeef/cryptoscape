@@ -1,47 +1,14 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Urbanist', sans-serif;
+}
+
 body { margin: 0; padding: 0; }
 
-.navbar {
-}
 
-.logo-container {
-    display: flex;
-    align-items: center;
-}
-
-.logo-container a:link, a:visited {
-    font-size: 18px;
-    color: rgb(228, 228, 228);
-    text-decoration: none;
-}
-
-.logo-container a:hover {
-    color: white;
-}
-
-.nav-container {
-    display: flex;
-    background-color: rgb(68, 68, 68);
-    height: 60px;
-}
-
-.menu-container {
-    display: flex;
+.cryptoContainer {
     width: 100%;
-    align-items: center;
-    color: white;
 }
-
-.menu-item a:link, a:visited{
-    color: rgb(228, 228, 228);
-    text-decoration: none;
-}
-
-.menu-item a:hover {
-    color: white;
-}
-
-
-
 
 .footer {
     text-align: center;

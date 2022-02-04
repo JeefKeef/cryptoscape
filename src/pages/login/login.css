@@ -1,0 +1,20 @@
+.login-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.login-btn {
+    font-size: 18px;
+    font-weight: bold;
+    width: 80%;
+    height: 2.5rem;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.login-signup-container {
+    padding: 10px;
+    text-align: center;
+}

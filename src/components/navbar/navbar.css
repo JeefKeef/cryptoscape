@@ -1,0 +1,52 @@
+.logo-container {
+    display: flex;
+    align-items: center;
+    padding: 7px;
+    width: 8%;
+    justify-content: space-between;
+}
+
+.logo-container a:link, a:visited {
+    font-size: 18px;
+    color: rgb(228, 228, 228);
+    text-decoration: none;
+}
+
+.logo-container a:hover {
+    color: white;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(68, 68, 68);
+    height: 60px;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 7px;
+}
+
+.menu-item a:link, a:visited{
+    color: rgb(228, 228, 228);
+    text-decoration: none;
+    padding: 0px 20px 0px 0px;
+}
+
+.menu-item a:hover {
+    color: white;
+}
+
+.menu-search-icon {
+    padding: 7px;
+}
+
+.searchInput {
+    border-radius: 12px;
+    margin-right: 50px;
+    padding: 5px;
+    width: 300px;
+}

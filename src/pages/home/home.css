@@ -1,0 +1,9 @@
+.homeContainer {
+    display: flex;
+    width: 70%;
+    height: 100vh;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: brown;
+}

@@ -1,41 +1,55 @@
-import * as React from "react";
-import "./home/home.css";
-import millify from "millify"; //used to convert long integers into readable format
+import "./watchlist.css";
+import { useGetCryptosQuery } from "../../services/cryptoApi";
+
+import React from "react";
+import millify from "millify";
 import {
+  IconButton,
   List,
   ListItem,
+  ListItemAvatar,
+  Avatar,
   ListItemText,
   Box,
   ListItemIcon,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import { useGetCryptosQuery } from "../services/cryptoApi";
-import { Cryptocurrencies, News, Sidebar, Feed, Watchlist } from ".";
 
 import {
   AccountBalanceOutlined,
   AttachMoneyOutlined,
   EqualizerOutlined,
   StorefrontOutlined,
+  Delete
 } from "@material-ui/icons";
 
 import {
   StackedLineChartOutlined,
 } from "@mui/icons-material";
 
-const Homepage = () => {
+import { Button } from "@material-ui/core";
+
+const Watchlist = ({ options }) => {
+
   const { data, isFetching } = useGetCryptosQuery(10); //create a hook
   const globalStats = data?.data?.stats;
 
   if (isFetching) return "Loading..."; //prevents undefined from loading webpage
-  // console.log("homepage start");
 
-  // console.log(data);
-  // console.log("homepage end");
+  const renderSwitch = (params) => {
+    switch (params) {
+      case "guest":
+        return <GuestWatchlist />;
+      case "profile":
+        return <ProfileWatchlist />;
+      default:
+        break;
+    }
+  };
 
-  return (
-    <>
+  const GuestWatchlist = () => {
+    return (
+      <>
       <Box className="home-global-container">
         <h1 className="homepage-header">Global Crypto Stats</h1>
         <List>
@@ -137,20 +151,46 @@ const Homepage = () => {
           </ListItem>
         </List>
       </Box>
-      <div className="home-heading-container">
-        <h1 className="homepage-header">
-          Top 10 Cryptocurrencies in the world
-        </h1>
-        <Link to="/cryptocurrencies">Show more</Link>
-        <Cryptocurrencies simplified />
-      </div>
-      <div className="home-heading-container">
-        <h1 className="homepage-header">Latest Crypto News</h1>
-        <Link to="/news">Show more</Link>
-        <News simplified />
-      </div>
-    </>
+        <div className="guest-watchlist-container">
+        Watchlist
+          <div className="guest-watchlist-signin">
+            Sign in to view watchlist
+            <div className="guest-watchlist-signin-btn">
+              <Button>Sign in</Button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
+  const ProfileWatchlist = () => {
+    return (
+      <>
+        <List>
+        Watchlist
+          <ListItem
+            secondaryAction={
+              <IconButton edge="end" aria-label="delete">
+                <Delete />
+              </IconButton>
+            }
+          >
+            <ListItemAvatar>
+              <Avatar>W</Avatar>
+            </ListItemAvatar>
+            <ListItemText>Doge</ListItemText>
+          </ListItem>
+        </List>
+      </>
+    );
+  };
+
+  return (
+    <div className="watchlist-container">
+      <div className="watchlist-wrapper">{renderSwitch(options.value)}</div>
+    </div>
   );
 };
 
-export default Homepage;
+export default Watchlist;

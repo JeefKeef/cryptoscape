@@ -1,3 +1,4 @@
+import "./news.css";
 import moment from "moment";
 import React, { useState, useEffect } from "react";
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
@@ -11,6 +12,8 @@ import {
   Avatar,
   CardMedia,
   Typography,
+  Grid,
+  Box,
 } from "@mui/material";
 
 const newsDemoImage =
@@ -21,7 +24,7 @@ const News = ({ simplified }) => {
   const { data: cryptoList } = useGetCryptosQuery(100);
   const { data: cryptoNews, isFetching } = useGetCryptoNewsQuery({
     newsCategory,
-    count: simplified ? 6 : 12,
+    count: simplified ? 4 : 12,
   });
 
   if (isFetching) return "Loading...";
@@ -29,8 +32,8 @@ const News = ({ simplified }) => {
   //console.log(cryptoNews);
 
   return (
-    <div>
-      <div>
+    <div className="news-container">
+      <div className="news-search-container">
         {!simplified && (
           <div>
             <Autocomplete
@@ -47,40 +50,59 @@ const News = ({ simplified }) => {
           </div>
         )}
       </div>
-
-      <Stack direction="row" spacing={2}>
-        {cryptoNews?.value.map((news) => (
-          <Card sx={{ maxWidth: 300 }}>
-            <a href={news?.url} target="_blank" rel="noreferrer">
-              <CardContent>
-                <div>
-                  <img
-                    src={news?.image?.thumbnail?.contentUrl || newsDemoImage}
-                    alt="news"
-                  ></img>
-                  <Typography variant="subtitle1">{news?.name}</Typography>
-                </div>
-              </CardContent>
-              <CardContent>
+      <div className="news-box">
+        <div className="news-box-wrapper">
+          <div className="news-card-container">
+            {cryptoNews?.value.map((news) => (
+              <Card className="news-card">
+                <a href={news?.url} target="_blank" rel="noreferrer">
+                  <CardContent className="news-content">
+                    <div className="news-image-container">
+                      <img
+                        className="news-image"
+                        src={
+                          news?.image?.thumbnail?.contentUrl || newsDemoImage
+                        }
+                        alt="news"
+                      ></img>
+                    </div>
+                    <div className="news-title-container">
+                      <span className="news-title">{news?.name}</span>
+                    </div>
+                    <div className="news-provider-container">
+                      <div className="news-provider-wrapper">
+                        <div className="news-provider-icon">
+                          <Avatar
+                            sx={{ width: 40, height: 40 }}
+                            src={
+                              news?.provider[0]?.image?.thumbnail?.contentUrl
+                            }
+                            alt={news?.provider[0]?.name}
+                          />
+                        </div>
+                        <div>
+                          <span className="news-timestamp">
+                            {moment(news?.datePublished)
+                              .startOf("ss")
+                              .fromNow()}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                  {/* <CardContent>
                 <Typography variant="subtitle2">
                   {news?.description.length > 50
                     ? `${news.description.substring(0, 50)}...`
                     : news.description}
                 </Typography>
-              </CardContent>
-              <CardContent className="news-provider-container">
-                <Avatar
-                  src={news?.provider[0]?.image?.thumbnail?.contentUrl}
-                  alt={news?.provider[0]?.name}
-                />
-                <Typography variant="subtitle2">
-                  {moment(news?.datePublished).startOf("ss").fromNow()}
-                </Typography>
-              </CardContent>
-            </a>
-          </Card>
-        ))}
-      </Stack>
+              </CardContent> */}
+                </a>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
