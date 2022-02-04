@@ -1,6 +1,6 @@
 import "./navbar.css";
 //23:40
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
@@ -13,10 +13,12 @@ import { MenuItem, Avatar, Button, Input } from "@mui/material";
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 
 import NewspaperIcon from "@mui/icons-material/Newspaper";
+import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = ({ options }) => {
   const [activeMenu, setActiveMenu] = useState(true);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -125,18 +127,22 @@ const Navbar = ({ options }) => {
             <span className="navbar-notification-badge">3</span>
           </MenuItem>
           <MenuItem className="menu-item">
-            <Avatar>J</Avatar>
+            <Link to={`/profile/${user.username}`}>
+              <Avatar
+                src={
+                  user.profilePicture ||
+                  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                }
+                alt=""
+              ></Avatar>
+            </Link>
           </MenuItem>
         </div>
       </>
     );
   };
 
-  return (
-    <div className="nav-container">
-      {renderSwitch(options.value)}
-    </div>
-  );
+  return <div className="nav-container">{renderSwitch(options.value)}</div>;
 };
 
 export default Navbar;

@@ -22,6 +22,7 @@ const Home = ({ user }) => {
               : { value: "guest" }
           }
         />
+        {user ? <Sidebar options={{user:user.username}}/> : <></>}
       </div>
     </div>
   );

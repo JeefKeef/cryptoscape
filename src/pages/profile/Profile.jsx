@@ -1,19 +1,20 @@
 import "./profile.css";
-import React from "react";
+import React, { useContext } from "react";
 import { Feed, Navbar, Sidebar, WatchList } from "../../components";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const Profile = () => {
-
   const username = useParams().username;
+  const { user } = useContext(AuthContext);
 
   return (
     <>
-      <Navbar options={{value:"guest"}}/>
+      <Navbar options={user ? { value: "profile" } : { value: "guest" }} />
       <div className="profile-home">
-          <WatchList options={{value:"guest"}}/>
-          <Feed options={{value:"profile", username:username}}/>
-          <Sidebar options={{user:username}}/>
+        <WatchList options={user ? { value: "profile" } : { value: "guest" }} />
+        <Feed options={{ value: "profile", username: username }} />
+        <Sidebar options={{ user: username }} />
       </div>
     </>
   );

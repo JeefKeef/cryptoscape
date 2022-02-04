@@ -29,7 +29,7 @@ const Post = ({ post }) => {
       <div className="post-wrapper">
         <div className="post-top">
           <div className="post-avatar-container">
-            <Link to={`profile/${user.username}`}>
+            <Link to={`/profile/${user.username}`}>
               <img
                 className="post-avatar"
                 src={
@@ -40,7 +40,7 @@ const Post = ({ post }) => {
               />
             </Link>
           </div>
-          <Link to={`profile/${user.username}`}>
+          <Link to={`/profile/${user.username}`}>
             <Typography className="post-user-name">{user.username}</Typography>
           </Link>
 
