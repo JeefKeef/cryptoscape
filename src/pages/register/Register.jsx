@@ -1,6 +1,6 @@
 import "./register.css";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
   Modal,
@@ -10,64 +10,71 @@ import {
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+import axios from "axios";
 
 const Register = () => {
+  const username = useRef();
+  const password = useRef();
+  const email = useRef();
+  const passwordRepeat = useRef();
+  const navigate = useNavigate();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (passwordRepeat.current.value !== password.current.value) {
+      passwordRepeat.current.setCustomValidity("Passwords don't match!");
+    } else {
+      const user = {
+        username: username.current.value,
+        email: email.current.value,
+        password: password.current.value,
+      };
+      try {
+        await axios.post("/auth/register", user);
+        navigate("/login");
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
-    <div>
-      <Box component="form" noValidate sx={style}>
+    <div className="register-container">
+      <form className="register-page-form" onSubmit={handleRegister}>
         <div>
-          <TextField
-            label="Username"
-            margin="normal"
+          <input
+            placeholder="Username"
             required
-            fullWidth
-            variant="outlined"
-            name="username"
-            autoComplete="username"
+            className="register-username-input"
+            ref={username}
           />
-          <TextField
-            id="password"
+          <input
+            placeholder="Email"
+            type="email"
+            required
+            className="register-email-input"
+            ref={email}
+          />
+          <input
+            placeholder="Password"
             type="password"
-            margin="normal"
             required
-            fullWidth
-            label="Password"
-            variant="outlined"
-            name="password"
-            autoComplete="current-password"
+            className="register-password-input"
+            minLength="6"
+            ref={password}
           />
-          <TextField
-            id="retype-password"
+          <input
+            placeholder="Renter Password"
             type="password"
-            margin="normal"
             required
-            fullWidth
-            label="Re-enter Password"
-            variant="outlined"
-            name="password"
-            autoComplete="current-password"
+            className="register-password-repeat-input"
+            minLength="6"
+            ref={passwordRepeat}
           />
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
           <div className="register-btn-container">
             <button className="register-btn" type="submit">
               Register
             </button>
-            {/* <Button>Register</Button> */}
           </div>
           <div className="login-signup-container">
             <Link to="/news" variant="body2">
@@ -75,7 +82,7 @@ const Register = () => {
             </Link>
           </div>
         </div>
-      </Box>
+      </form>
     </div>
   );
 };

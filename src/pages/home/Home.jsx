@@ -1,15 +1,27 @@
 import "./home.css";
 import React from "react";
-import { Cryptocurrencies, Feed, Navbar, Sidebar, WatchList } from "../../components";
+import {
+  Cryptocurrencies,
+  Feed,
+  Navbar,
+  Sidebar,
+  WatchList,
+} from "../../components";
 
-const Home = () => {
+const Home = ({ user }) => {
   return (
     <div>
-        <Navbar options={{ value: "profile" }} />
-        <Cryptocurrencies simplified/>
+      <Navbar options={user ? { value: "profile" } : { value: "guest" }} />
+      <Cryptocurrencies simplified />
       <div className="homeContainer">
-        <WatchList options={{ value: "profile" }} />
-        <Feed options={{ value: "home", username:"john" }} />
+        <WatchList options={user ? { value: "profile" } : { value: "guest" }} />
+        <Feed
+          options={
+            user
+              ? { value: "home", username: user.username }
+              : { value: "guest" }
+          }
+        />
       </div>
     </div>
   );

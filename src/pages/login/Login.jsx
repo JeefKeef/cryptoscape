@@ -11,19 +11,8 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
+  CircularProgress,
 } from "@mui/material";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 const Login = () => {
 
@@ -34,10 +23,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     loginCall({username:username.current.value, password:password.current.value}, dispatch);
-    // loginCall({username:username.current.value, password:password.current.value}, dispatch);
   };
-
-  console.log(user);
 
   return (
     <div className="login-page-container">
@@ -58,8 +44,7 @@ const Login = () => {
             ref={password}
           />
           <div className="login-btn-container">
-            <button className="login-btn" type="submit" >Log In</button>
-            {/* <Button>Register</Button> */}
+            <button className="login-btn" type="submit" disabled={isFetching}>{isFetching ? <CircularProgress/> : "Log In"}</button>
           </div>
           <div className="login-signup-container">
             <Link to="/news" variant="body2">

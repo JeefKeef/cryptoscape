@@ -1,6 +1,7 @@
 import "./App.css";
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext";
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 //import { Routes, Route, Link } from "react-router-dom";
 
 import { Navbar } from "./components";
@@ -19,11 +20,13 @@ import {
 import { LoginPage, Profile, Login, Register, Home } from "./pages";
 
 const App = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={user ? <Home user={user}/> : <Home guest/>} />
+        <Route path="/login" element={user ? <Navigate to="/"/> : <Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile/:username" element={<Profile />} />
       </Routes>
