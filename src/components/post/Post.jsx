@@ -12,7 +12,8 @@ const Post = ({ post }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
   const { user: currentUser } = useContext(AuthContext);
-
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+ 
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser._id));
   }, [currentUser._id, post.likes]);
@@ -59,7 +60,7 @@ const Post = ({ post }) => {
         </div>
         <div className="post-middle">
           <span className="post-text">{post?.desc}</span>
-          <img className="post-img" src={post?.img} alt="" />
+          <img className="post-img" src={PF + post?.img} alt="" />
         </div>
         <div className="post-bottom">
           <div className="post-options">

@@ -97,6 +97,10 @@ router.put("/:id/unfollow", async (req, res) => {
     res.status(403).json("You cannot unfollow yourself");
   }
 });
+
+//get friend list
+
+
 //add stock
 //remove stock
 
