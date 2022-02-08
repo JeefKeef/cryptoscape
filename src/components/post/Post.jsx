@@ -52,7 +52,7 @@ const Post = ({ post }) => {
               />
             </Link>
           </div>
-          <Link to={`/profile/${user.username}`}>
+          <Link to={`/profile/${user.username}`} style={{textDecoration:"none"}}>
             <Typography className="post-user-name">{user.username}</Typography>
           </Link>
 

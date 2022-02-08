@@ -55,7 +55,7 @@ const News = ({ simplified }) => {
           <div className="news-card-container">
             {cryptoNews?.value.map((news) => (
               <Card className="news-card">
-                <a href={news?.url} target="_blank" rel="noreferrer">
+                <a href={news?.url} target="_blank" rel="noreferrer" style={{textDecoration:"none"}}>
                   <CardContent className="news-content">
                     <div className="news-image-container">
                       <img

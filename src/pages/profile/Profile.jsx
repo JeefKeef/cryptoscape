@@ -1,6 +1,6 @@
 import "./profile.css";
 import React, { useContext } from "react";
-import { Feed, Navbar, Sidebar, WatchList } from "../../components";
+import { Feed, Friendsbar, Navbar, Sidebar, WatchList } from "../../components";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 

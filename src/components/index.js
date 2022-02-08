@@ -11,3 +11,4 @@ export { default as WatchList } from "./watchlist/Watchlist";
 export { default as Share } from "./share/Share";
 export { default as Post } from "./post/Post";
 export { default as Profileinfo } from "./profileinfo/Profileinfo";
+export { default as Friendsbar } from "./friendsbar/Friendsbar";

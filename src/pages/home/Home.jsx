@@ -6,6 +6,7 @@ import {
   Navbar,
   Sidebar,
   WatchList,
+  Friendsbar
 } from "../../components";
 
 const Home = ({ user }) => {
@@ -23,6 +24,7 @@ const Home = ({ user }) => {
           }
         />
         {user ? <Sidebar options={{user:user.username}}/> : <></>}
+        {user ? <Friendsbar user={user}/> : <></>}
       </div>
     </div>
   );
