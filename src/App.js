@@ -17,7 +17,7 @@ import {
   WatchList,
 } from "./components";
 
-import { LoginPage, Profile, Login, Register, Home } from "./pages";
+import { Profile, Login, Register, Home, Messenger } from "./pages";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -27,8 +27,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={user ? <Home user={user}/> : <Home guest/>} />
         <Route path="/login" element={user ? <Navigate to="/"/> : <Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={user ? <Navigate to="/"/> : <Register />} />
         <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/messenger" element={!user ? <Navigate to="/"/> : <Messenger/>}/>
       </Routes>
     </Router>
 
