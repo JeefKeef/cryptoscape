@@ -1,7 +1,7 @@
 import "./message.css";
 import React from "react";
 
-const Message = ({own}) => {
+const Message = ({own, message}) => {
   return (
     <div className={own ? "message-container own" : "message-container"}>
       <div className="message-top">
@@ -11,13 +11,10 @@ const Message = ({own}) => {
           alt=""
         />
         <p className="message-text">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-          excepturi cupiditate, molestias eius animi incidunt, maxime ipsum ad
-          molestiae veritatis ratione totam magni nam ex ullam, eos voluptate
-          quod quasi.
+          {message.text}
         </p>
       </div>
-      <div className="message-bottom">1 hour ago</div>
+      <div className="message-bottom">{message?.createdAt}</div>
     </div>
   );
 };
