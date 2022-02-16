@@ -2,8 +2,13 @@ import "./conversation.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const Conversation = ({ conversation, currentUser }) => {
+const Conversation = ({ conversation, currentUser, onlineUsers }) => {
   const [user, setUser] = useState(null);
+  const [onlineFriends, setOnlineFriends] = useState([]);
+
+  // useEffect(() => {
+  //   setOnlineFriends(onlineUsers.filter((f) => onlineUsers.includes(user._id)));
+  // }, [onlineUsers]);
 
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser._id);
@@ -26,6 +31,7 @@ const Conversation = ({ conversation, currentUser }) => {
         alt=""
       />
       <span className="chatbox-username">{user?.username}</span>
+      {onlineUsers.some((f) => f.userId === user?._id) && <span className="chatbox-userstatus">online</span>}
     </div>
   );
 };

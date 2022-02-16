@@ -12,6 +12,7 @@ const Messenger = () => {
   const [messages, setMessages] = useState("");
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [onlineFriend, setOnlineFriend] = useState([]);
   const scrollRef = useRef();
   const socket = useRef();
 
@@ -28,7 +29,11 @@ const Messenger = () => {
 
   useEffect(() => {
     socket?.current.emit("addUser", user._id);
-    socket?.current.on("getUsers");
+    socket?.current.on("getUsers", (users) => {
+      setOnlineFriend(
+        user.followings.filter((f) => users.some((u) => u.userId === f))
+      );
+    });
   }, [user._id]);
 
   useEffect(() => {
@@ -103,9 +108,14 @@ const Messenger = () => {
             />
             {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
-                <Conversation conversation={c} currentUser={user} />
+                <Conversation
+                  conversation={c}
+                  currentUser={user}
+                  onlineUsers={onlineFriend}
+                />
               </div>
             ))}
+            <button className="messenger-menu-add-btn">New conversation</button>
           </div>
         </div>
         <div className="messenger-chatbox">
