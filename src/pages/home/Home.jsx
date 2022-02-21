@@ -9,10 +9,10 @@ import {
   Friendsbar
 } from "../../components";
 
-const Home = ({ user }) => {
+const Home = ({ user, socket }) => {
   return (
     <div>
-      <Navbar options={user ? { value: "profile" } : { value: "guest" }} />
+      <Navbar options={user ? { value: "profile"} : { value: "guest" }} socket={socket}/>
       <Cryptocurrencies simplified />
       <div className="homeContainer">
         <WatchList options={user ? { value: "profile" } : { value: "guest" }} />
@@ -22,6 +22,7 @@ const Home = ({ user }) => {
               ? { value: "home", username: user.username }
               : { value: "guest" }
           }
+          socket={socket}
         />
         {user ? <Sidebar options={{user:user.username}}/> : <></>}
         {user ? <Friendsbar user={user}/> : <></>}
@@ -31,3 +32,4 @@ const Home = ({ user }) => {
 };
 
 export default Home;
+//figure out user feed rendering and real time notification

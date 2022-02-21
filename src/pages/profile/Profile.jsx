@@ -4,16 +4,15 @@ import { Feed, Friendsbar, Navbar, Sidebar, WatchList } from "../../components";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-const Profile = () => {
+const Profile = ({socket, user}) => {
   const username = useParams().username;
-  const { user } = useContext(AuthContext);
 
   return (
     <>
-      <Navbar options={user ? { value: "profile" } : { value: "guest" }} />
+      <Navbar options={user ? { value: "profile" } : { value: "guest" }} socket={socket}/>
       <div className="profile-home">
         <WatchList options={user ? { value: "profile" } : { value: "guest" }} />
-        <Feed options={{ value: "profile", username: username }} />
+        <Feed options={{ value: "profile", username: username }} socket={socket} />
         <Sidebar options={{ user: username }} />
       </div>
     </>

@@ -15,10 +15,52 @@ import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { AuthContext } from "../../context/AuthContext";
 
-const Navbar = ({ options }) => {
+const Navbar = ({ options, socket }) => {
   const [activeMenu, setActiveMenu] = useState(true);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const { user } = useContext(AuthContext);
+  const [notifications, setNotifications] = useState([]);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    socket?.on("getNotification", (data) => {
+      setNotifications((prev) => [...prev, data]);
+    });
+  }, [socket]);
+
+
+  const displayNotification = ({ senderName, type }) => {
+    let action;
+    switch (type) {
+      case "liked":
+        action = type;
+        return (
+          <span className="notification">{`${senderName} ${action} your post`}</span>
+        );
+      case "commented":
+        action = type;
+        return (
+          <span className="notification">{`${senderName} ${action} your post`}</span>
+        );
+      case "followed":
+        action = type;
+        return (
+          <span className="notification">{`${senderName} ${action} you`}</span>
+        );
+      case "messaged":
+        action = type;
+        return (
+          <span className="notification">{`${senderName} ${action} you`}</span>
+        );
+      default:
+        break;
+    }
+  };
+
+  const handleRead = () => {
+    setNotifications([]);
+    setOpen(false);
+  };
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -111,7 +153,7 @@ const Navbar = ({ options }) => {
             <Search className="menu-search-icon" />
             <input placeholder="Search for people" className="searchInput" />
           </MenuItem>
-          <MenuItem className="menu-item">
+          {/* <MenuItem className="menu-item">
             <Link to="/news">Timeline</Link>
           </MenuItem>
           <MenuItem className="menu-item">
@@ -121,10 +163,14 @@ const Navbar = ({ options }) => {
           <MenuItem className="menu-item">
             <Chat />
             <span className="navbar-chat-badge">21</span>
-          </MenuItem>
-          <MenuItem className="menu-item">
+          </MenuItem> */}
+          <MenuItem className="menu-item" onClick={()=>setOpen(!open)}>
             <Notifications />
-            <span className="navbar-notification-badge">3</span>
+            {notifications.length > 0 && (
+              <span className="navbar-notification-badge">
+                {notifications.length}
+              </span>
+            )}
           </MenuItem>
           <MenuItem className="menu-item">
             <Link to={`/profile/${user.username}`}>
@@ -138,6 +184,14 @@ const Navbar = ({ options }) => {
             </Link>
           </MenuItem>
         </div>
+        {open && (
+          <div className="notifications">
+            {notifications.map((n) => displayNotification(n))}
+            <button className="notifcation-clear-btn" onClick={handleRead}>
+              Mark as read
+            </button>
+          </div>
+        )}
       </>
     );
   };

@@ -6,14 +6,13 @@ import { Avatar, Button } from "@material-ui/core";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 
-const Feed = ({ options }) => {
+const Feed = ({ options, socket }) => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
   const { user: currUser } = useContext(AuthContext);
-
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = options.username
+      const res = options.value !== "home"
         ? await axios.get("/posts/profile/" + options.username)
         : await axios.get("/posts/timeline/" + currUser._id);
       setPosts(
@@ -22,12 +21,15 @@ const Feed = ({ options }) => {
         })
       );
     };
+    fetchPosts();
+  }, [options, currUser._id]);
+
+  useEffect(() => {
     const fetchUser = async () => {
       const res = await axios.get(`/users?username=${options.username}`);
       setUser(res.data);
     };
     fetchUser();
-    fetchPosts();
   }, [options.username]);
 
   const renderSwitch = (params) => {
@@ -48,7 +50,7 @@ const Feed = ({ options }) => {
       <>
         <Profileinfo profile={user} />
         {posts?.map((post) => (
-          <Post key={post._id} post={post} />
+          <Post key={post._id} post={post} socket={socket} />
         ))}
       </>
     );
@@ -59,7 +61,7 @@ const Feed = ({ options }) => {
       <>
         <Share />
         {posts?.map((post) => (
-          <Post key={post._id} post={post} />
+          <Post key={post._id} post={post} socket={socket} />
         ))}
       </>
     );
