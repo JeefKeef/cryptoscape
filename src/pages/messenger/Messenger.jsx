@@ -5,8 +5,9 @@ import { AuthContext } from "../../context/AuthContext";
 import { useEffect } from "react";
 import axios from "axios";
 import io from "socket.io-client";
-const Messenger = () => {
-  const { user } = useContext(AuthContext);
+import { Button } from "@material-ui/core";
+const Messenger = ({ user, socket }) => {
+  //const { user } = useContext(AuthContext);
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState("");
@@ -14,27 +15,25 @@ const Messenger = () => {
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [onlineFriend, setOnlineFriend] = useState([]);
   const scrollRef = useRef();
-  const socket = useRef();
+
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
-    socket.current.on("getMessage", (data) => {
+    socket?.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
         createdAt: Date.now(),
       });
     });
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
-    socket?.current.emit("addUser", user._id);
-    socket?.current.on("getUsers", (users) => {
+    socket?.on("getUsers", (users) => {
       setOnlineFriend(
         user.followings.filter((f) => users.some((u) => u.userId === f))
       );
     });
-  }, [user._id]);
+  }, [user, socket]);
 
   useEffect(() => {
     arrivalMessage &&
@@ -81,7 +80,7 @@ const Messenger = () => {
       (member) => member !== user._id
     );
 
-    socket.current.emit("sendMessage", {
+    socket.emit("sendMessage", {
       senderId: user._id,
       receiverId,
       text: newMessage,
@@ -91,14 +90,26 @@ const Messenger = () => {
       const res = await axios.post("/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
+      handleNotification("messaged");
     } catch (err) {
       console.log(err);
     }
   };
 
+  const handleNotification = (type) => {
+    const receiverId = currentChat?.members.find(
+      (member) => member !== user._id
+    );
+    socket.emit("sendNotification", {
+      senderName: user.username,
+      receiverName: receiverId,
+      type,
+    });
+  };
+
   return (
     <>
-      <Navbar options={{ value: "profile" }} />
+      <Navbar options={{ value: "profile" }} socket={socket} />
       <div className="messenger-container">
         <div className="messenger-menu">
           <div className="messenger-menu-wrapper">
@@ -157,3 +168,4 @@ const Messenger = () => {
 };
 
 export default Messenger;
+//fix  messenging notification

@@ -35,6 +35,8 @@ const App = () => {
     user && socket?.emit("addUser", user._id) ;
   }, [socket, user]);
 
+  console.log(socket)
+
   return (
     <Router>
       <Routes>
@@ -50,7 +52,7 @@ const App = () => {
         <Route path="/profile/:username" element={<Profile user={user} socket={socket}/>} />
         <Route
           path="/messenger"
-          element={!user ? <Navigate to="/" /> : <Messenger />}
+          element={!user ? <Navigate to="/" /> : <Messenger user={user} socket={socket}/>}
         />
       </Routes>
     </Router>

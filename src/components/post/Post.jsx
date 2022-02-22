@@ -37,6 +37,7 @@ const Post = ({ post, socket }) => {
   };
 
   const handleNotifcation = (type) => {
+    !isLiked &&
     socket.emit("sendNotification", {
       senderName: currentUser.username,
       receiverName: post.userId,

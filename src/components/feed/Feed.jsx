@@ -48,7 +48,7 @@ const Feed = ({ options, socket }) => {
   const ProfileFeed = () => {
     return (
       <>
-        <Profileinfo profile={user} />
+        <Profileinfo profile={user} socket={socket} />
         {posts?.map((post) => (
           <Post key={post._id} post={post} socket={socket} />
         ))}
