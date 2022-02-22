@@ -7,15 +7,15 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-const Post = ({ post }) => {
+const Post = ({ post, socket }) => {
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
   const { user: currentUser } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
- 
+
   useEffect(() => {
-    setIsLiked(post.likes.includes(currentUser._id));
+    setIsLiked(post?.likes.includes(currentUser._id));
   }, [currentUser._id, post.likes]);
 
   useEffect(() => {
@@ -28,12 +28,21 @@ const Post = ({ post }) => {
 
   const likedHandler = async () => {
     try {
-        await axios.put("/posts/" + post._id + "/like", {
+      await axios.put("/posts/" + post._id + "/like", {
         userId: currentUser._id,
       });
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
+  };
+
+  const handleNotifcation = (type) => {
+    !isLiked &&
+    socket.emit("sendNotification", {
+      senderName: currentUser.username,
+      receiverName: post.userId,
+      type,
+    });
   };
 
   return (
@@ -52,7 +61,10 @@ const Post = ({ post }) => {
               />
             </Link>
           </div>
-          <Link to={`/profile/${user.username}`} style={{textDecoration:"none"}}>
+          <Link
+            to={`/profile/${user.username}`}
+            style={{ textDecoration: "none" }}
+          >
             <Typography className="post-user-name">{user.username}</Typography>
           </Link>
 
@@ -68,7 +80,13 @@ const Post = ({ post }) => {
               <AddCommentIcon />
               <span className="post-comment-counter">{post.comment}</span>
             </Button>
-            <Button className="post-like-btn" onClick={likedHandler}>
+            <Button
+              className="post-like-btn"
+              onClick={() => {
+                likedHandler();
+                handleNotifcation("liked");
+              }}
+            >
               <ThumbUpIcon />
               <span className="post-like-counter">{like}</span>
             </Button>

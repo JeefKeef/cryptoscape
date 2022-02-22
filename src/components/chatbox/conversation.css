@@ -1,0 +1,22 @@
+.chatbox-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.chatbox-container:hover {
+    background-color: lightgray;
+}
+
+.chatbox-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.chatbox-username {
+    font-weight: bold;
+}

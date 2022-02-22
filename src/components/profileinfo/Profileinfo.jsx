@@ -5,7 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useEffect } from "react";
 import axios from "axios";
 
-const Profileinfo = ({ profile }) => {
+const Profileinfo = ({ profile, socket }) => {
   const { user, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
     user.followings.includes(profile?._id)
@@ -34,6 +34,15 @@ const Profileinfo = ({ profile }) => {
     }
   };
 
+  const handleNotification = (type) => {
+    !followed &&
+      socket.emit("sendNotification", {
+        senderName: user.username,
+        receiverName: profile._id,
+        type,
+      });
+  };
+
   return (
     <div className="profile-info-container">
       <div className="profile-info-top">
@@ -50,7 +59,13 @@ const Profileinfo = ({ profile }) => {
         <div className="profile-name-container">
           <div className="profile-name">{profile.username}</div>
           {user.username !== profile.username && (
-            <button className="profile-follow-btn" onClick={handleFollowClick}>
+            <button
+              className="profile-follow-btn"
+              onClick={() => {
+                handleFollowClick();
+                handleNotification("followed");
+              }}
+            >
               {followed ? "Unfollow" : "Follow"}
             </button>
           )}
