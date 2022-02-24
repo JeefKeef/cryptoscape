@@ -43,8 +43,28 @@ const Watchlist = ({ options }) => {
   const globalStats = data?.data?.stats;
 
   useEffect(() => {
+    const addHandler = async () => {
+      try {
+        crypto &&
+          await axios.put("/watchlist/add", {
+            userId: currUser._id,
+            watchlistId: watchlist?.data[0]._id,
+            cryptoId: crypto?.uuid,
+          })
+          .then(async(response) => {
+            const res = await axios.get("/watchlist/" + currUser._id);
+            setWatchlist(res);
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    addHandler();
+  }, [watchlist?.data, currUser._id, crypto]);
+
+  useEffect(() => {
     const fetchWatchlist = async () => {
-      const res = currUser && (await axios.get("/watchlist/" + currUser._id));
+      const res = currUser && await axios.get("/watchlist/" + currUser._id);
       if (res?.data.length === 0 && currUser) {
         await axios.post("/watchlist", {
           userId: currUser._id,
@@ -58,11 +78,13 @@ const Watchlist = ({ options }) => {
   }, [currUser]);
 
   useEffect(() => {
-    const filteredData = data?.data?.coins.filter((coin) =>
+    const filteredData = data?.data?.coins.find((coin) =>
       coin.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setCrypto(filteredData);
-  }, [searchTerm, data]);
+  }, [searchTerm]);
+
+  if (isFetching) return "Loading..."; //prevents undefined from loading webpage
 
   const renderSwitch = (params) => {
     switch (params) {
@@ -74,7 +96,6 @@ const Watchlist = ({ options }) => {
         break;
     }
   };
-  if (isFetching) return "Loading..."; //prevents undefined from loading webpage
 
   const GuestWatchlist = () => {
     return (
@@ -211,13 +232,22 @@ const Watchlist = ({ options }) => {
                       <SearchOutlined />
                     </div>
                   }
+                  inputProps={{
+                    ...params.inputProps,
+                    onKeyDown: (e) => {
+                      if (e.key === "Enter") {
+                        e.stopPropagation();
+                      }
+                    },
+                  }}
                 />
               )}
+              // onChange={(coin) => console.log(coin.target.innerText)}
               onChange={(coin) => setSearchTerm(coin.target.innerText)}
             />
           </div>
           {watchlist?.data[0]?.userWatchlist.map((coinId) => (
-            <WatchlistCard cryptoId={coinId}/>
+            <WatchlistCard cryptoId={coinId} />
           ))}
         </List>
       </>

@@ -1,0 +1,56 @@
+.watchlist-card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.watchlist-card-img {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    padding: 0.3rem;
+}
+
+.watchlist-card-left {
+    display: flex;
+    
+}
+
+.watchlist-card-ticker-container {
+    padding: 0.3rem;
+}
+
+.watchlist-card-ticker-symbol {
+    display: flex;
+    font-weight: bold;
+}
+
+.watchlist-card-ticker-name {
+    display: flex;
+    font-size: small;
+    font-weight: bold;
+}
+
+.watchlist-card-right {
+    display: flex;
+    align-items: center;
+}
+
+.watchlist-card-price {
+    display: flex;
+    font-weight: bold;
+    text-align: right;
+}
+
+.watchlist-card-change {
+    display: flex;
+    font-size: small;
+    font-weight: bold;
+    float: right;
+}
+
+.watchlist-card-delete {
+    width: 2rem;
+    height: 2rem;
+}
