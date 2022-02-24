@@ -168,4 +168,3 @@ const Messenger = ({ user, socket }) => {
 };
 
 export default Messenger;
-//fix  messenging notification

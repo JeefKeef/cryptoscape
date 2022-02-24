@@ -8,6 +8,7 @@ const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 const messageRoute = require("./routes/messages");
 const conversationRoute = require("./routes/conversations");
+const watchlistRoute = require("./routes/watchlist");
 const multer = require("multer");
 const path = require("path");
 
@@ -63,3 +64,4 @@ app.use("/api/auth", authRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/conversations", conversationRoute);
+app.use("/api/watchlist", watchlistRoute);
