@@ -5,6 +5,8 @@ import React from "react";
 import { useGetCryptoDetailsQuery } from "../../services/cryptoApi";
 import { IconButton } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
+import axios from "axios";
+import { useState } from "react";
 
 const WatchlistCard = ({ cryptoId }) => {
   const { data, isFetching } = useGetCryptoDetailsQuery(cryptoId);
@@ -32,9 +34,9 @@ const WatchlistCard = ({ cryptoId }) => {
             {millify(coinDetail?.change)}%
           </text>
         </div>
-        <IconButton className="watchlist-card-delete">
-          <Delete fontSize="small"/>
-        </IconButton>
+        {/* <IconButton className="watchlist-card-delete">
+          <Delete fontSize="small" onClick={handleDelete}/>
+        </IconButton> */}
       </div>
     </div>
   );
@@ -54,5 +56,13 @@ secondaryAction={
   <Avatar>W</Avatar>
 </ListItemAvatar>
 <ListItemText>Doge</ListItemText>
-</ListItem> */
+</ListItem> 
+
+
+
+on click axios put delete from watchlist
+
+
+
+*/
 }

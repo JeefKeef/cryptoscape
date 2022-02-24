@@ -1,8 +1,9 @@
 .watchlist-card-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
+    width: 100%;
+    position: relative;
 }
 
 .watchlist-card-img {
@@ -14,11 +15,11 @@
 
 .watchlist-card-left {
     display: flex;
-    
 }
 
 .watchlist-card-ticker-container {
     padding: 0.3rem;
+
 }
 
 .watchlist-card-ticker-symbol {
@@ -33,8 +34,10 @@
 }
 
 .watchlist-card-right {
-    display: flex;
     align-items: center;
+    position: absolute;
+    right: 0;
+    padding-right: 0.3rem;
 }
 
 .watchlist-card-price {
@@ -50,7 +53,7 @@
     float: right;
 }
 
-.watchlist-card-delete {
+/* .watchlist-card-delete {
     width: 2rem;
     height: 2rem;
-}
+} */

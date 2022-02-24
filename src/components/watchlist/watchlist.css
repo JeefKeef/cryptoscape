@@ -21,6 +21,17 @@
 .watchlist-search-icon {
 }
 
+.watchlist-trash-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.watchlist-card-delete {
+    width: 2rem;
+    height: 2rem;
+}
+
 
 ::-webkit-scrollbar {
     width:5px;

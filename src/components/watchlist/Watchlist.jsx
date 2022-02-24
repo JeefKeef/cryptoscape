@@ -46,15 +46,16 @@ const Watchlist = ({ options }) => {
     const addHandler = async () => {
       try {
         crypto &&
-          await axios.put("/watchlist/add", {
-            userId: currUser._id,
-            watchlistId: watchlist?.data[0]._id,
-            cryptoId: crypto?.uuid,
-          })
-          .then(async(response) => {
-            const res = await axios.get("/watchlist/" + currUser._id);
-            setWatchlist(res);
-          });
+          (await axios
+            .put("/watchlist/add", {
+              userId: currUser._id,
+              watchlistId: watchlist?.data[0]._id,
+              cryptoId: crypto?.uuid,
+            })
+            .then(async (response) => {
+              const res = await axios.get("/watchlist/" + currUser._id);
+              setWatchlist(res);
+            }));
       } catch (err) {
         console.log(err);
       }
@@ -64,7 +65,7 @@ const Watchlist = ({ options }) => {
 
   useEffect(() => {
     const fetchWatchlist = async () => {
-      const res = currUser && await axios.get("/watchlist/" + currUser._id);
+      const res = currUser && (await axios.get("/watchlist/" + currUser._id));
       if (res?.data.length === 0 && currUser) {
         await axios.post("/watchlist", {
           userId: currUser._id,
@@ -79,12 +80,29 @@ const Watchlist = ({ options }) => {
 
   useEffect(() => {
     const filteredData = data?.data?.coins.find((coin) =>
-      coin.name.toLowerCase().includes(searchTerm.toLowerCase())
+      coin.name.toLowerCase().includes(searchTerm && searchTerm.toLowerCase())
     );
     setCrypto(filteredData);
   }, [searchTerm]);
 
   if (isFetching) return "Loading..."; //prevents undefined from loading webpage
+  const handleDelete = async (coinId) => {
+    try {
+      await axios
+        .put("/watchlist/delete", {
+          userId: currUser._id,
+          watchlistId: watchlist?.data[0]._id,
+          cryptoId: coinId,
+        })
+        .then(async (response) => {
+          const res = await axios.get("/watchlist/" + currUser._id);
+          setCrypto(null);
+          setWatchlist(res);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const renderSwitch = (params) => {
     switch (params) {
@@ -247,7 +265,14 @@ const Watchlist = ({ options }) => {
             />
           </div>
           {watchlist?.data[0]?.userWatchlist.map((coinId) => (
-            <WatchlistCard cryptoId={coinId} />
+            <div className="watchlist-trash-container">
+              <WatchlistCard
+                cryptoId={coinId}
+              />
+              <IconButton className="watchlist-card-delete">
+                <Delete fontSize="small" onClick={() => handleDelete(coinId)} />
+              </IconButton>
+            </div>
           ))}
         </List>
       </>
