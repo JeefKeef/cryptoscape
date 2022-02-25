@@ -11,18 +11,18 @@ import {
 import { io } from "socket.io-client";
 import { Navbar } from "./components";
 
-import {
-  //Navbar,
-  Homepage,
-  CryptoDetails,
-  Cryptocurrencies,
-  News,
-  Sidebar,
-  Feed,
-  WatchList,
-} from "./components";
+// import {
+//   //Navbar,
+//   Homepage,
+//   CryptoDetails,
+//   Cryptocurrencies,
+//   News,
+//   Sidebar,
+//   Feed,
+//   WatchList,
+// } from "./components";
 
-import { Profile, Login, Register, Home, Messenger } from "./pages";
+import { Profile, Login, Register, Home, Messenger, CryptoDetails } from "./pages";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -54,6 +54,7 @@ const App = () => {
           path="/messenger"
           element={!user ? <Navigate to="/" /> : <Messenger user={user} socket={socket}/>}
         />
+        <Route path="/crypto/:coinId" element={<CryptoDetails/>}/>
       </Routes>
     </Router>
 
