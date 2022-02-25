@@ -7,6 +7,8 @@ import { IconButton } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 const WatchlistCard = ({ cryptoId }) => {
   const { data, isFetching } = useGetCryptoDetailsQuery(cryptoId);
@@ -15,6 +17,7 @@ const WatchlistCard = ({ cryptoId }) => {
   if (isFetching) return "Loading...";
 
   return (
+    <Link to={"/crypto/" + cryptoId} style={{textDecoration:"none"}}>
     <div className="watchlist-card-container">
       <div className="watchlist-card-left">
         <img className="watchlist-card-img" src={coinDetail?.iconUrl} alt="" />
@@ -39,6 +42,7 @@ const WatchlistCard = ({ cryptoId }) => {
         </IconButton> */}
       </div>
     </div>
+    </Link>
   );
 };
 
