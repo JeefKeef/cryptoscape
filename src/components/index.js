@@ -15,3 +15,5 @@ export { default as Friendsbar } from "./friendsbar/Friendsbar";
 export { default as Conversation } from "./chatbox/Conversation";
 export { default as Message } from "./message/Message";
 export { default as WatchlistCard } from "./watchlistCard/WatchlistCard";
+export { default as Comment } from "./comment/Comment";
+export { default as PostComment } from "./postComment/PostComment";

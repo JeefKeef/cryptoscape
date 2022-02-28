@@ -49,7 +49,7 @@ const Watchlist = ({ options }) => {
           (await axios
             .put("/watchlist/add", {
               userId: currUser._id,
-              watchlistId: watchlist?.data[0]._id,
+              watchlistId: watchlist?.data?.[0]._id,
               cryptoId: crypto?.uuid,
             })
             .then(async (response) => {
@@ -91,7 +91,7 @@ const Watchlist = ({ options }) => {
       await axios
         .put("/watchlist/delete", {
           userId: currUser._id,
-          watchlistId: watchlist?.data[0]._id,
+          watchlistId: watchlist?.data?.[0]._id,
           cryptoId: coinId,
         })
         .then(async (response) => {
@@ -118,7 +118,7 @@ const Watchlist = ({ options }) => {
   const GuestWatchlist = () => {
     return (
       <>
-        <Box className="home-global-container">
+        {/* <Box className="home-global-container">
           <h1 className="homepage-header">Global Crypto Stats</h1>
           <List>
             <ListItem>
@@ -227,7 +227,7 @@ const Watchlist = ({ options }) => {
               <Button>Sign in</Button>
             </div>
           </div>
-        </div>
+        </div> */}
       </>
     );
   };
@@ -241,7 +241,7 @@ const Watchlist = ({ options }) => {
             <Autocomplete
               id="watchlist-search"
               freeSolo
-              options={data?.data?.coins.map((coin) => coin.name)}
+              options={data?.data?.coins.map((coin) => coin?.name)}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -264,7 +264,7 @@ const Watchlist = ({ options }) => {
               onChange={(coin) => setSearchTerm(coin.target.innerText)}
             />
           </div>
-          {watchlist?.data[0]?.userWatchlist.map((coinId) => (
+          {currUser && watchlist?.data?.[0]?.userWatchlist.map((coinId) => (
             <div className="watchlist-trash-container">
               <WatchlistCard
                 cryptoId={coinId}

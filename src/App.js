@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 //import { Routes, Route, Link } from "react-router-dom";
 import { io } from "socket.io-client";
-import { Navbar } from "./components";
+import { Navbar, PostDetails } from "./components";
 
 // import {
 //   //Navbar,
@@ -22,7 +22,7 @@ import { Navbar } from "./components";
 //   WatchList,
 // } from "./components";
 
-import { Profile, Login, Register, Home, Messenger, CryptoDetails } from "./pages";
+import { Profile, Login, Register, Home, Messenger, CryptoDetails,  CommentPage } from "./pages";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -55,6 +55,7 @@ const App = () => {
           element={!user ? <Navigate to="/" /> : <Messenger user={user} socket={socket}/>}
         />
         <Route path="/crypto/:coinId" element={<CryptoDetails/>}/>
+        <Route path="/post/:postId" element={<CommentPage/>}/>
       </Routes>
     </Router>
 
