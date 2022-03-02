@@ -6,3 +6,5 @@ export { default as Home } from "./home/Home";
 export { default as Messenger } from "./messenger/Messenger";
 export { default as CryptoDetails } from "./cryptodetails/Cryptodetails";
 export { default as CommentPage } from "./commentPage/CommentPage";
+export { default as ReplyPage } from "./replyPage/ReplyPage";
+

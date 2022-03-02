@@ -8,8 +8,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-const Comment = ({comment, socket}) => {
-
+const Comment = ({ comment, socket }) => {
   const [like, setLike] = useState(comment?.likes?.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
@@ -39,7 +38,8 @@ const Comment = ({comment, socket}) => {
   };
 
   const handleNotifcation = (type) => {
-    !isLiked && currentUser?._id !== comment?.userId &&
+    !isLiked &&
+      currentUser?._id !== comment?.userId &&
       socket.emit("sendNotification", {
         senderName: currentUser?.username,
         receiverName: comment?.userId,
@@ -50,7 +50,7 @@ const Comment = ({comment, socket}) => {
   return (
     <div className="comment-container">
       <div className="comment-wrapper">
-      <div className="comment-top">
+        <div className="comment-top">
           <div className="comment-avatar-container">
             <Link to={`/profile/${user?.username}`}>
               <img
@@ -67,7 +67,9 @@ const Comment = ({comment, socket}) => {
             to={`/profile/${user?.username}`}
             style={{ textDecoration: "none" }}
           >
-            <Typography className="comment-user-name">{user?.username}</Typography>
+            <Typography className="comment-user-name">
+              {user?.username}
+            </Typography>
           </Link>
 
           <span className="comment-time">{comment?.createdAt}</span>
@@ -78,10 +80,15 @@ const Comment = ({comment, socket}) => {
         </div>
         <div className="comment-bottom">
           <div className="comment-options">
-            <Link to={"/post/" + comment?._id} style={{ textDecoration: "none" }}>
+            <Link
+              to={"/reply/" + comment?._id}
+              style={{ textDecoration: "none" }}
+            >
               <Button className="comment-comment-btn">
                 <AddCommentIcon />
-                <span className="comment-comment-counter">{comment?.length}</span>
+                <span className="comment-comment-counter">
+                  {comment?.replies?.length !== 0 && comment?.replies?.length}
+                </span>
               </Button>
             </Link>
             <Button
@@ -92,13 +99,15 @@ const Comment = ({comment, socket}) => {
               }}
             >
               <ThumbUpIcon />
-              <span className="comment-like-counter">{like}</span>
+              <span className="comment-like-counter">{like !== 0 && like}</span>
             </Button>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Comment
+export default Comment;
+
+//create comment reply component

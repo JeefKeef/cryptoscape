@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Navbar, Feed, Sidebar, Post, PostComment } from "../../components";
 import axios from "axios";
 
-const CommentPage = () => {
+const CommentPage = ({ socket }) => {
   const { postId } = useParams();
   const [post, setPost] = useState([]);
   const [comments, setComments] = useState([]);
@@ -37,13 +37,10 @@ const CommentPage = () => {
   return (
     <div>
       <Post post={post} />
-      <PostComment postId={postId} />
+      <PostComment postId={postId} setComments={setComments} socket={socket} />
       <Feed options={{ value: "comment" }} comments={comments} />
     </div>
   );
 };
 
 export default CommentPage;
-
-//try out comment rendering without page refresh without feed
-//new component?

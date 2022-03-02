@@ -17,3 +17,6 @@ export { default as Message } from "./message/Message";
 export { default as WatchlistCard } from "./watchlistCard/WatchlistCard";
 export { default as Comment } from "./comment/Comment";
 export { default as PostComment } from "./postComment/PostComment";
+export { default as ReplyComment } from "./replyComment/ReplyComment";
+export { default as Reply } from "./reply/Reply";
+

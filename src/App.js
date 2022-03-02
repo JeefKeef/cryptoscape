@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 //import { Routes, Route, Link } from "react-router-dom";
 import { io } from "socket.io-client";
-import { Navbar, PostDetails } from "./components";
+import { Navbar, PostDetails, ReplyComment } from "./components";
 
 // import {
 //   //Navbar,
@@ -22,7 +22,16 @@ import { Navbar, PostDetails } from "./components";
 //   WatchList,
 // } from "./components";
 
-import { Profile, Login, Register, Home, Messenger, CryptoDetails,  CommentPage } from "./pages";
+import {
+  Profile,
+  Login,
+  Register,
+  Home,
+  Messenger,
+  CryptoDetails,
+  CommentPage,
+  ReplyPage,
+} from "./pages";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -32,30 +41,41 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    user && socket?.emit("addUser", user._id) ;
+    user && socket?.emit("addUser", user._id);
   }, [socket, user]);
 
-  console.log(socket)
+  console.log(socket);
 
   return (
     <Router>
       <Routes>
         <Route
           path="/"
-          element={user ? <Home user={user} socket={socket}/> : <Home guest />}
+          element={user ? <Home user={user} socket={socket} /> : <Home guest />}
         />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
         <Route
           path="/register"
           element={user ? <Navigate to="/" /> : <Register />}
         />
-        <Route path="/profile/:username" element={<Profile user={user} socket={socket}/>} />
+        <Route
+          path="/profile/:username"
+          element={<Profile user={user} socket={socket} />}
+        />
         <Route
           path="/messenger"
-          element={!user ? <Navigate to="/" /> : <Messenger user={user} socket={socket}/>}
+          element={
+            !user ? (
+              <Navigate to="/" />
+            ) : (
+              <Messenger user={user} socket={socket} />
+            )
+          }
         />
-        <Route path="/crypto/:coinId" element={<CryptoDetails/>}/>
-        <Route path="/post/:postId" element={<CommentPage/>}/>
+        <Route path="/crypto/:coinId" element={<CryptoDetails />} />
+        <Route path="/post/:postId" element={<CommentPage socket={socket}/>} />
+        <Route path="/reply/:commentId" element={<ReplyPage socket={socket}/>} />
+        <Route path="/reply/:commentId/reply/:replyId" element={<ReplyPage socket={socket}/> } />
       </Routes>
     </Router>
 

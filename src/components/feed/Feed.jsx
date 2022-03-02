@@ -1,16 +1,16 @@
 import "./feed.css";
 import React, { useState, useEffect, useContext } from "react";
-import { Share, Post, Profileinfo, Comment } from "../";
+import { Share, Post, Profileinfo, Comment, Reply } from "../";
 import News from "../News";
 import { Avatar, Button } from "@material-ui/core";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
 
-const Feed = ({ options, socket, comments }) => {
+const Feed = ({ options, socket, comments, replies }) => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
   const { user: currUser } = useContext(AuthContext);
-  
+
   useEffect(() => {
     const fetchPosts = async () => {
       const res =
@@ -44,16 +44,28 @@ const Feed = ({ options, socket, comments }) => {
         return <GuestFeed />;
       case "comment":
         return <CommentFeed />;
+      case "reply":
+        return <ReplyFeed />;
       default:
         break;
     }
+  };
+
+  const ReplyFeed = () => {
+    return (
+      <>
+        {replies?.map((reply) => (
+          <Reply key={reply?._id} reply={reply} socket={socket}/>
+        ))}
+      </>
+    );
   };
 
   const CommentFeed = () => {
     return (
       <>
         {comments?.map((comment) => (
-          <Comment key={comment?._id} comment={comment} socket={socket}/>
+          <Comment key={comment?._id} comment={comment} socket={socket} />
         ))}
       </>
     );

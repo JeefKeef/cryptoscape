@@ -1,4 +1,4 @@
-import "./post.css";
+import "./reply.css";
 import React, { useEffect, useState, useContext } from "react";
 import { Avatar, Typography, Button } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -7,28 +7,28 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-const Post = ({ post, socket }) => {
-  const [like, setLike] = useState(post?.likes?.length);
+const Reply = ({ reply, socket }) => {
+  const [like, setLike] = useState(reply?.likes?.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
   const { user: currentUser } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
-    setIsLiked(post?.likes?.includes(currentUser?._id));
-  }, [currentUser?._id, post?.likes]);
+    setIsLiked(reply?.likes?.includes(currentUser?._id));
+  }, [currentUser?._id, reply?.likes]);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?userId=${post?.userId}`);
-      setUser(res?.data);
+      const res = await axios.get(`/users?userId=${reply?.userId}`);
+      setUser(res.data);
     };
     fetchUser();
-  }, [post?.userId]);
+  }, [reply?.userId]);
 
   const likedHandler = async () => {
     try {
-      await axios.put("/posts/" + post?._id + "/like", {
+      await axios.put("/reply/" + reply?._id + "/like", {
         userId: currentUser?._id,
       });
     } catch (err) {}
@@ -37,22 +37,23 @@ const Post = ({ post, socket }) => {
   };
 
   const handleNotifcation = (type) => {
-    !isLiked && currentUser?._id !== post?.userId &&
+    !isLiked &&
+      currentUser?._id !== reply?.userId &&
       socket.emit("sendNotification", {
         senderName: currentUser?.username,
-        receiverName: post?.userId,
+        receiverName: reply?.userId,
         type,
       });
   };
 
   return (
-    <div className="post-container">
-      <div className="post-wrapper">
-        <div className="post-top">
-          <div className="post-avatar-container">
+    <div className="reply-container">
+      <div className="reply-wrapper">
+        <div className="reply-top">
+          <div className="reply-avatar-container">
             <Link to={`/profile/${user?.username}`}>
               <img
-                className="post-avatar"
+                className="reply-avatar"
                 src={
                   user.profilePicture ||
                   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
@@ -65,32 +66,37 @@ const Post = ({ post, socket }) => {
             to={`/profile/${user?.username}`}
             style={{ textDecoration: "none" }}
           >
-            <Typography className="post-user-name">{user?.username}</Typography>
+            <Typography className="reply-user-name">
+              {user?.username}
+            </Typography>
           </Link>
 
-          <span className="post-time">{post?.createdAt}</span>
+          <span className="reply-time">{reply?.createdAt}</span>
         </div>
-        <div className="post-middle">
-          <span className="post-text">{post?.desc}</span>
-          <img className="post-img" src={PF + post?.img} alt="" />
+        <div className="reply-middle">
+          <span className="reply-text">{reply?.desc}</span>
+          <img className="reply-img" src={PF + reply?.img} alt="" />
         </div>
-        <div className="post-bottom">
-          <div className="post-options">
-            <Link to={"/post/" + post?._id} style={{ textDecoration: "none" }}>
-              <Button className="post-comment-btn">
+        <div className="reply-bottom">
+          <div className="reply-options">
+            <Link
+              to={"/reply/" + reply?.commentId + "/reply/" + reply?._id}
+              style={{ textDecoration: "none" }}
+            >
+              <Button className="reply-reply-btn">
                 <AddCommentIcon />
-                <span className="post-comment-counter">{post?.comments?.length !== 0 && post?.comments?.length}</span>
+                <span className="reply-reply-counter">{reply?.replies?.length !== 0 && reply?.replies?.length}</span>
               </Button>
             </Link>
             <Button
-              className="post-like-btn"
+              className="reply-like-btn"
               onClick={() => {
                 likedHandler();
                 handleNotifcation("liked");
               }}
             >
               <ThumbUpIcon />
-              <span className="post-like-counter">{like !== 0 && like}</span>
+              <span className="reply-like-counter">{like !== 0 && like}</span>
             </Button>
           </div>
         </div>
@@ -99,4 +105,4 @@ const Post = ({ post, socket }) => {
   );
 };
 
-export default Post;
+export default Reply;

@@ -1,5 +1,4 @@
-import "./postComment.css";
-
+import "./replyComment.css";
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { Avatar, Button, Input } from "@mui/material";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
@@ -7,31 +6,33 @@ import AddPhotoAlternateRoundedIcon from "@mui/icons-material/AddPhotoAlternateR
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { CancelOutlined } from "@mui/icons-material";
+import { useParams } from "react-router-dom";
 
-const PostComment = ({ postId, setComments, socket }) => {
+const ReplyComment = ({ commentId, setReplies, socket }) => {
   const { user } = useContext(AuthContext);
+  const [receivingUser, setReceivingUser] = useState({});
   const desc = useRef();
   const [file, setFile] = useState(null);
-  const [receivingUser, setReceivingUser] = useState({});
+  const { replyId } = useParams();
 
   useEffect(() => {
     try {
-      const getPostUser = async () => {
-        const res = await axios.get("/posts/" + postId);
+      const getCommentUser = async () => {
+        const res = await axios.get("/comment/" + commentId + "/comment");
         setReceivingUser(res?.data);
       };
-      getPostUser();
+      getCommentUser();
     } catch (err) {
       console.log(err);
     }
-  }, [postId]);
+  }, [commentId]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const newComment = {
+    const newReply = {
       userId: user._id,
       desc: desc.current.value,
-      postId: postId,
+      commentId: !replyId && commentId,
     };
 
     if (file) {
@@ -39,7 +40,7 @@ const PostComment = ({ postId, setComments, socket }) => {
       const fileName = Date.now() + file.name;
       data.append("name", fileName);
       data.append("file", file);
-      newComment.img = fileName;
+      newReply.img = fileName;
 
       try {
         await axios.post("/upload", data);
@@ -49,12 +50,23 @@ const PostComment = ({ postId, setComments, socket }) => {
     }
 
     try {
-      await axios.post("/comment", newComment).then(async (response) => {
-        const res = await axios.get("/comment/" + postId);
-        setComments(res?.data);
-        handleNotifcation("commented", receivingUser?.userId);
-        desc.current.value = "";
-      });
+      if (replyId) {
+        await axios
+          .post("/reply/" + replyId, newReply)
+          .then(async (response) => {
+            const res = await axios.get("/reply/all/" + replyId);
+            setReplies(res?.data);
+            handleNotifcation("replied", receivingUser?.userId);
+            desc.current.value = "";
+          });
+      } else {
+        await axios.post("/reply", newReply).then(async (response) => {
+          const res = await axios.get("/reply/" + commentId);
+          setReplies(res?.data);
+          handleNotifcation("replied", receivingUser?.userId);
+          desc.current.value = "";
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -62,49 +74,49 @@ const PostComment = ({ postId, setComments, socket }) => {
 
   const handleNotifcation = (type, receiverId) => {
     user?._id !== receiverId &&
-    socket.emit("sendNotification", {
-      senderName: user?.username,
-      receiverName: receiverId,
-      type,
-    });
+      socket.emit("sendNotification", {
+        senderName: user?.username,
+        receiverName: receiverId,
+        type,
+      });
   };
 
   return (
-    <div className="comment-container">
-      <div className="comment-wrapper">
-        <div className="comment-top">
+    <div className="reply-container">
+      <div className="reply-wrapper">
+        <div className="reply-top">
           <Avatar
             src={
               user.profilePicture ||
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
             }
-            className="comment-profile-img"
+            className="reply-profile-img"
           ></Avatar>
           <input
-            placeholder="Reply post"
-            className="comment-input"
+            placeholder="Reply comment"
+            className="reply-input"
             ref={desc}
           />
           {file && (
-            <div className="comment-img-container">
+            <div className="reply-img-container">
               <img
-                className="comment-img"
+                className="reply-img"
                 src={URL.createObjectURL(file)}
                 alt=""
               />
               <CancelOutlined
-                className="comment-cancel"
+                className="reply-cancel"
                 onClick={() => setFile(null)}
               />
             </div>
           )}
         </div>
-        <div className="comment-bottom">
-          <form className="comment-options" onSubmit={submitHandler}>
-            <button className="comment-btn">
+        <div className="reply-bottom">
+          <form className="reply-options" onSubmit={submitHandler}>
+            <button className="reply-btn">
               <AddCircleOutlineRoundedIcon />
             </button>
-            <label htmlFor="file" className="comment-img">
+            <label htmlFor="file" className="reply-img">
               <AddPhotoAlternateRoundedIcon />
               <input
                 style={{ display: "none" }}
@@ -121,4 +133,6 @@ const PostComment = ({ postId, setComments, socket }) => {
   );
 };
 
-export default PostComment;
+export default ReplyComment;
+
+//update new posts with useState no page refresh. send notification

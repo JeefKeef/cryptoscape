@@ -28,7 +28,6 @@ const Navbar = ({ options, socket }) => {
     });
   }, [socket]);
 
-
   const displayNotification = ({ senderName, type }) => {
     let action;
     switch (type) {
@@ -51,6 +50,11 @@ const Navbar = ({ options, socket }) => {
         action = type;
         return (
           <span className="notification">{`${senderName} ${action} you`}</span>
+        );
+      case "replied":
+        action = type;
+        return (
+          <span className="notification">{`${senderName} ${action} to your comment`}</span>
         );
       default:
         break;
@@ -164,7 +168,7 @@ const Navbar = ({ options, socket }) => {
             <Chat />
             <span className="navbar-chat-badge">21</span>
           </MenuItem> */}
-          <MenuItem className="menu-item" onClick={()=>setOpen(!open)}>
+          <MenuItem className="menu-item" onClick={() => setOpen(!open)}>
             <Notifications />
             {notifications.length > 0 && (
               <span className="navbar-notification-badge">
