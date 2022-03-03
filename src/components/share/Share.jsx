@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { CancelOutlined } from "@mui/icons-material";
 
-const Share = () => {
+const Share = ({ setPosts, socket }) => {
   const { user } = useContext(AuthContext);
   const desc = useRef();
   const [file, setFile] = useState(null);
@@ -28,14 +28,35 @@ const Share = () => {
 
       try {
         await axios.post("/upload", data);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     }
 
     try {
-      await axios.post("/posts", newPost);
-      window.location.reload();
-    } catch (err) {}
+      await axios.post("/posts", newPost).then(async (response) => {
+        const res = await axios.get("/posts/timeline/" + user?._id);
+        setPosts(
+          res?.data.sort((p1, p2) => {
+            return new Date(p2.createdAt) - new Date(p1.createdAt);
+          })
+        );
+        handleNotifcation("post", user?.followers);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  const handleNotifcation = (type, followers) => {
+    // user?._id !== receiverId &&
+      socket.emit("sendPostNotification", {
+        senderName: user?.username,
+        followers: followers,
+        type,
+      });
+  };
+
 
   return (
     <div className="share-container">
@@ -58,7 +79,7 @@ const Share = () => {
               />
               <CancelOutlined
                 className="share-cancel"
-                onClick={()=>setFile(null)}
+                onClick={() => setFile(null)}
               />
             </div>
           )}
@@ -86,3 +107,5 @@ const Share = () => {
 };
 
 export default Share;
+
+//fix following to update state and get real time post notificaiton

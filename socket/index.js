@@ -19,6 +19,11 @@ const getUser = (userId) => {
   return users.find((user) => user.userId === userId);
 };
 
+const getUsers = (followers) => {
+  const res = users.filter((user) => followers.includes(user.userId));
+  return res;
+};
+
 io.on("connection", (socket) => {
   //connected
   console.log("a user connected.");
@@ -44,6 +49,17 @@ io.on("connection", (socket) => {
       senderName,
       type,
     });
+  });
+
+  //post notificaiton
+  socket.on("sendPostNotification", ({ senderName, followers, type }) => {
+    const receivers = getUsers(followers);
+    receivers.map((receiver) =>
+      io.to(receiver.socketId).emit("getPostNotification", {
+        senderName,
+        type,
+      })
+    );
   });
 
   //disconnected

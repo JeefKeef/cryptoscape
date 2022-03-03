@@ -36,6 +36,7 @@ import {
 const App = () => {
   const { user } = useContext(AuthContext);
   const [socket, setSocket] = useState(null);
+
   useEffect(() => {
     setSocket(io("http://localhost:8900"));
   }, []);

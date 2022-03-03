@@ -134,5 +134,3 @@ const ReplyComment = ({ commentId, setReplies, socket }) => {
 };
 
 export default ReplyComment;
-
-//update new posts with useState no page refresh. send notification

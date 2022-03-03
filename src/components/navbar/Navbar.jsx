@@ -20,11 +20,18 @@ const Navbar = ({ options, socket }) => {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   const { user } = useContext(AuthContext);
   const [notifications, setNotifications] = useState([]);
+  const [postNotifications, setPostNotifications] = useState([]);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     socket?.on("getNotification", (data) => {
       setNotifications((prev) => [...prev, data]);
+    });
+  }, [socket]);
+
+  useEffect(() => {
+    socket?.on("getPostNotification", (data) => {
+      setPostNotifications((prev) => [...prev, data]);
     });
   }, [socket]);
 
@@ -56,13 +63,21 @@ const Navbar = ({ options, socket }) => {
         return (
           <span className="notification">{`${senderName} ${action} to your comment`}</span>
         );
+      case "post":
+        action = type;
+        return (
+          <span className="notification">{`${senderName} added a new ${action}`}</span>
+        );
       default:
         break;
     }
   };
 
+  console.log(postNotifications);
+
   const handleRead = () => {
     setNotifications([]);
+    setPostNotifications([]);
     setOpen(false);
   };
 
@@ -205,3 +220,5 @@ const Navbar = ({ options, socket }) => {
 
 export default Navbar;
 //fix responsive navbar
+//figure out  why console log is repeating post notification
+// combine post and regular notificataions to one array

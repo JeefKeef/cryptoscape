@@ -12,7 +12,7 @@ const Profileinfo = ({ profile, socket }) => {
   );
 
   useEffect(() => {
-    setFollowed(user.followings.includes(profile?._id));
+    setFollowed(user?.followings.includes(profile?._id));
   }, [user, profile?._id]);
 
   const handleFollowClick = async () => {
