@@ -4,6 +4,8 @@ import { WatchlistCard } from "..";
 import Autocomplete from "@mui/material/Autocomplete";
 
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import millify from "millify";
 import {
   IconButton,
@@ -48,12 +50,12 @@ const Watchlist = ({ options }) => {
         crypto &&
           (await axios
             .put("/watchlist/add", {
-              userId: currUser._id,
+              userId: currUser?._id,
               watchlistId: watchlist?.data?.[0]._id,
               cryptoId: crypto?.uuid,
             })
             .then(async (response) => {
-              const res = await axios.get("/watchlist/" + currUser._id);
+              const res = await axios.get("/watchlist/" + currUser?._id);
               setWatchlist(res);
             }));
       } catch (err) {
@@ -61,14 +63,14 @@ const Watchlist = ({ options }) => {
       }
     };
     addHandler();
-  }, [watchlist?.data, currUser._id, crypto]);
+  }, [watchlist?.data, currUser?._id, crypto]);
 
   useEffect(() => {
     const fetchWatchlist = async () => {
-      const res = currUser && (await axios.get("/watchlist/" + currUser._id));
+      const res = currUser && (await axios.get("/watchlist/" + currUser?._id));
       if (res?.data.length === 0 && currUser) {
         await axios.post("/watchlist", {
-          userId: currUser._id,
+          userId: currUser?._id,
           userWatchlist: [],
         });
         fetchWatchlist();
@@ -90,12 +92,12 @@ const Watchlist = ({ options }) => {
     try {
       await axios
         .put("/watchlist/delete", {
-          userId: currUser._id,
+          userId: currUser?._id,
           watchlistId: watchlist?.data?.[0]._id,
           cryptoId: coinId,
         })
         .then(async (response) => {
-          const res = await axios.get("/watchlist/" + currUser._id);
+          const res = await axios.get("/watchlist/" + currUser?._id);
           setCrypto(null);
           setWatchlist(res);
         });
@@ -118,7 +120,7 @@ const Watchlist = ({ options }) => {
   const GuestWatchlist = () => {
     return (
       <>
-        {/* <Box className="home-global-container">
+        <Box className="home-global-container">
           <h1 className="homepage-header">Global Crypto Stats</h1>
           <List>
             <ListItem>
@@ -135,7 +137,7 @@ const Watchlist = ({ options }) => {
                       variant="body2"
                       color="text.primary"
                     ></Typography>
-                    {millify(globalStats.total)}
+                    {millify(globalStats?.total)}
                   </React.Fragment>
                 }
               />
@@ -154,7 +156,7 @@ const Watchlist = ({ options }) => {
                       variant="body2"
                       color="text.primary"
                     ></Typography>
-                    {millify(globalStats.totalExchanges)}
+                    {millify(globalStats?.totalExchanges)}
                   </React.Fragment>
                 }
               />
@@ -173,7 +175,7 @@ const Watchlist = ({ options }) => {
                       variant="body2"
                       color="text.primary"
                     ></Typography>
-                    {millify(globalStats.totalMarketCap)}
+                    {millify(globalStats?.totalMarketCap)}
                   </React.Fragment>
                 }
               />
@@ -192,7 +194,7 @@ const Watchlist = ({ options }) => {
                       variant="body2"
                       color="text.primary"
                     ></Typography>
-                    {millify(globalStats.total24hVolume)}
+                    {millify(globalStats?.total24hVolume)}
                   </React.Fragment>
                 }
               />
@@ -212,7 +214,7 @@ const Watchlist = ({ options }) => {
                       variant="body2"
                       color="text.primary"
                     ></Typography>
-                    {millify(globalStats.totalMarkets)}
+                    {millify(globalStats?.totalMarkets)}
                   </React.Fragment>
                 }
               />
@@ -224,10 +226,10 @@ const Watchlist = ({ options }) => {
           <div className="guest-watchlist-signin">
             Sign in to view watchlist
             <div className="guest-watchlist-signin-btn">
-              <Button>Sign in</Button>
+              <Link to="/login">Log In</Link>
             </div>
           </div>
-        </div> */}
+        </div>
       </>
     );
   };
@@ -264,16 +266,18 @@ const Watchlist = ({ options }) => {
               onChange={(coin) => setSearchTerm(coin.target.innerText)}
             />
           </div>
-          {currUser && watchlist?.data?.[0]?.userWatchlist.map((coinId) => (
-            <div className="watchlist-trash-container">
-              <WatchlistCard
-                cryptoId={coinId}
-              />
-              <IconButton className="watchlist-card-delete">
-                <Delete fontSize="small" onClick={() => handleDelete(coinId)} />
-              </IconButton>
-            </div>
-          ))}
+          {currUser &&
+            watchlist?.data?.[0]?.userWatchlist.map((coinId) => (
+              <div className="watchlist-trash-container">
+                <WatchlistCard cryptoId={coinId} />
+                <IconButton className="watchlist-card-delete">
+                  <Delete
+                    fontSize="small"
+                    onClick={() => handleDelete(coinId)}
+                  />
+                </IconButton>
+              </div>
+            ))}
         </List>
       </>
     );
@@ -287,3 +291,9 @@ const Watchlist = ({ options }) => {
 };
 
 export default Watchlist;
+//work on starting conversaton component
+//work on updating user profile
+//add crypto and news routes
+//refine design
+//tests
+//deploy

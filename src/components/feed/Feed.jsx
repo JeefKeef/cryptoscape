@@ -16,7 +16,7 @@ const Feed = ({ options, socket, comments, replies }) => {
       const res =
         options.value !== "home"
           ? await axios.get("/posts/profile/" + options.username)
-          : await axios.get("/posts/timeline/" + currUser._id);
+          : await axios.get("/posts/timeline/" + currUser?._id);
       setPosts(
         res?.data.sort((p1, p2) => {
           return new Date(p2.createdAt) - new Date(p1.createdAt);
@@ -24,7 +24,7 @@ const Feed = ({ options, socket, comments, replies }) => {
       );
     };
     fetchPosts();
-  }, [options, currUser._id]);
+  }, [options, currUser?._id]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -55,7 +55,7 @@ const Feed = ({ options, socket, comments, replies }) => {
     return (
       <>
         {replies?.map((reply) => (
-          <Reply key={reply?._id} reply={reply} socket={socket}/>
+          <Reply key={reply?._id} reply={reply} socket={socket} />
         ))}
       </>
     );
@@ -85,7 +85,7 @@ const Feed = ({ options, socket, comments, replies }) => {
   const HomeFeed = () => {
     return (
       <>
-        <Share setPosts={setPosts} socket={socket}/>
+        <Share setPosts={setPosts} socket={socket} />
         {posts?.map((post) => (
           <Post key={post._id} post={post} socket={socket} />
         ))}

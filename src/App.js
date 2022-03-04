@@ -46,6 +46,7 @@ const App = () => {
   }, [socket, user]);
 
   console.log(socket);
+  console.log(user);
 
   return (
     <Router>
@@ -61,7 +62,7 @@ const App = () => {
         />
         <Route
           path="/profile/:username"
-          element={<Profile user={user} socket={socket} />}
+          element={!user ? <Navigate to="/" /> : <Profile user={user} socket={socket} />}
         />
         <Route
           path="/messenger"

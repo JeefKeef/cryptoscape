@@ -1,5 +1,5 @@
 import "./navbar.css";
-//23:40
+import { logoutCall } from "../../apiCalls";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -18,9 +18,8 @@ import { AuthContext } from "../../context/AuthContext";
 const Navbar = ({ options, socket }) => {
   const [activeMenu, setActiveMenu] = useState(true);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const [notifications, setNotifications] = useState([]);
-  const [postNotifications, setPostNotifications] = useState([]);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ const Navbar = ({ options, socket }) => {
 
   useEffect(() => {
     socket?.on("getPostNotification", (data) => {
-      setPostNotifications((prev) => [...prev, data]);
+      setNotifications((prev) => [...prev, data]);
     });
   }, [socket]);
 
@@ -73,11 +72,13 @@ const Navbar = ({ options, socket }) => {
     }
   };
 
-  console.log(postNotifications);
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logoutCall(dispatch);
+  };
 
   const handleRead = () => {
     setNotifications([]);
-    setPostNotifications([]);
     setOpen(false);
   };
 
@@ -202,6 +203,9 @@ const Navbar = ({ options, socket }) => {
               ></Avatar>
             </Link>
           </MenuItem>
+          <MenuItem className="menu-item">
+              <a href="#" onClick={handleLogout}>Logout</a>
+          </MenuItem>
         </div>
         {open && (
           <div className="notifications">
@@ -220,5 +224,3 @@ const Navbar = ({ options, socket }) => {
 
 export default Navbar;
 //fix responsive navbar
-//figure out  why console log is repeating post notification
-// combine post and regular notificataions to one array
