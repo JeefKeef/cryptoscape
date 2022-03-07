@@ -184,6 +184,12 @@ const Navbar = ({ options, socket }) => {
             <Chat />
             <span className="navbar-chat-badge">21</span>
           </MenuItem> */}
+          <MenuItem className="menu-item">
+            <Link to={"/messenger"}>
+              <Chat />
+              <span className="navbar-chat-badge"></span>
+            </Link>
+          </MenuItem>
           <MenuItem className="menu-item" onClick={() => setOpen(!open)}>
             <Notifications />
             {notifications.length > 0 && (
@@ -204,7 +210,9 @@ const Navbar = ({ options, socket }) => {
             </Link>
           </MenuItem>
           <MenuItem className="menu-item">
-              <a href="#" onClick={handleLogout}>Logout</a>
+            <a href="#" onClick={handleLogout}>
+              Logout
+            </a>
           </MenuItem>
         </div>
         {open && (

@@ -19,4 +19,4 @@ export { default as Comment } from "./comment/Comment";
 export { default as PostComment } from "./postComment/PostComment";
 export { default as ReplyComment } from "./replyComment/ReplyComment";
 export { default as Reply } from "./reply/Reply";
-
+export { default as NewConversationModal } from "./newConversationModal/NewConversationModal";

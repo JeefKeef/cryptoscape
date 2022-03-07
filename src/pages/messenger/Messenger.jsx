@@ -1,6 +1,6 @@
 import "./messenger.css";
 import React, { useContext, useState, useRef } from "react";
-import { Conversation, Message, Navbar } from "../../components";
+import { Conversation, Message, Navbar, NewConversationModal } from "../../components";
 import { AuthContext } from "../../context/AuthContext";
 import { useEffect } from "react";
 import axios from "axios";
@@ -107,16 +107,23 @@ const Messenger = ({ user, socket }) => {
     });
   };
 
+  const handleNewConversation = (e) => {
+    e.preventDefault();
+    return (<NewConversationModal/>);
+  }
+
   return (
     <>
       <Navbar options={{ value: "profile" }} socket={socket} />
       <div className="messenger-container">
         <div className="messenger-menu">
           <div className="messenger-menu-wrapper">
-            <input
+          <button className="messenger-menu-add-btn" onClick={handleNewConversation}>New conversation</button>
+          <NewConversationModal/>
+            {/* <input
               className="messenger-searchbar"
               placeholder="Search friends"
-            />
+            /> */}
             {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
                 <Conversation
@@ -126,7 +133,6 @@ const Messenger = ({ user, socket }) => {
                 />
               </div>
             ))}
-            <button className="messenger-menu-add-btn">New conversation</button>
           </div>
         </div>
         <div className="messenger-chatbox">

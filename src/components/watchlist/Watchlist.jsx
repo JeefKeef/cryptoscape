@@ -291,9 +291,3 @@ const Watchlist = ({ options }) => {
 };
 
 export default Watchlist;
-//work on starting conversaton component
-//work on updating user profile
-//add crypto and news routes
-//refine design
-//tests
-//deploy
