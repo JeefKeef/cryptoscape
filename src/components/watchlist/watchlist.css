@@ -15,10 +15,11 @@
 
 #watchlist-search {
     width: 100%;
-    height: 0.5rem;
+    height: 1rem;
 }
 
 .watchlist-search-icon {
+    
 }
 
 .watchlist-trash-container {

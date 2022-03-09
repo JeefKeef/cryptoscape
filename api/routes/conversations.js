@@ -7,8 +7,16 @@ router.post("/", async (req, res) => {
     members: [req.body.senderId, req.body.receiverId],
   });
   try {
-    const savedConversation = await newConversation.save();
-    res.status(200).json(savedConversation);
+    const conversationExist = await Conversation.exists({
+      members: [req.body.senderId, req.body.receiverId],
+    });
+    if (!conversationExist) {
+      const savedConversation = await newConversation.save();
+      res.status(200).json(savedConversation);
+    }
+    else {
+      res.status(403).json("Conversation already exist");
+    }
   } catch (err) {
     res.status(500).json(err);
   }

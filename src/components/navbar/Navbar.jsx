@@ -1,5 +1,5 @@
 import "./navbar.css";
-//23:40
+import { logoutCall } from "../../apiCalls";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -18,7 +18,7 @@ import { AuthContext } from "../../context/AuthContext";
 const Navbar = ({ options, socket }) => {
   const [activeMenu, setActiveMenu] = useState(true);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
 
@@ -28,6 +28,11 @@ const Navbar = ({ options, socket }) => {
     });
   }, [socket]);
 
+  useEffect(() => {
+    socket?.on("getPostNotification", (data) => {
+      setNotifications((prev) => [...prev, data]);
+    });
+  }, [socket]);
 
   const displayNotification = ({ senderName, type }) => {
     let action;
@@ -52,9 +57,24 @@ const Navbar = ({ options, socket }) => {
         return (
           <span className="notification">{`${senderName} ${action} you`}</span>
         );
+      case "replied":
+        action = type;
+        return (
+          <span className="notification">{`${senderName} ${action} to your comment`}</span>
+        );
+      case "post":
+        action = type;
+        return (
+          <span className="notification">{`${senderName} added a new ${action}`}</span>
+        );
       default:
         break;
     }
+  };
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logoutCall(dispatch);
   };
 
   const handleRead = () => {
@@ -164,7 +184,13 @@ const Navbar = ({ options, socket }) => {
             <Chat />
             <span className="navbar-chat-badge">21</span>
           </MenuItem> */}
-          <MenuItem className="menu-item" onClick={()=>setOpen(!open)}>
+          <MenuItem className="menu-item">
+            <Link to={"/messenger"}>
+              <Chat />
+              <span className="navbar-chat-badge"></span>
+            </Link>
+          </MenuItem>
+          <MenuItem className="menu-item" onClick={() => setOpen(!open)}>
             <Notifications />
             {notifications.length > 0 && (
               <span className="navbar-notification-badge">
@@ -182,6 +208,11 @@ const Navbar = ({ options, socket }) => {
                 alt=""
               ></Avatar>
             </Link>
+          </MenuItem>
+          <MenuItem className="menu-item">
+            <a href="#" onClick={handleLogout}>
+              Logout
+            </a>
           </MenuItem>
         </div>
         {open && (

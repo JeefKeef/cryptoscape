@@ -10,7 +10,6 @@ const Conversation = ({ conversation, currentUser, onlineUsers }) => {
   //   setOnlineFriends(onlineUsers.filter((f) => onlineUsers.includes(user._id)));
   // }, [onlineUsers]);
 
-  console.log(onlineUsers);
 
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser._id);

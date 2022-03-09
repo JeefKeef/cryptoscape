@@ -9,7 +9,7 @@ import {
   Friendsbar
 } from "../../components";
 
-const Home = ({ user, socket }) => {
+const Home = ({ user, socket, guest }) => {
   return (
     <div>
       <Navbar options={user ? { value: "profile"} : { value: "guest" }} socket={socket}/>
@@ -32,4 +32,3 @@ const Home = ({ user, socket }) => {
 };
 
 export default Home;
-//figure out user feed rendering and real time notification
