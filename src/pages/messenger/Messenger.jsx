@@ -1,11 +1,18 @@
 import "./messenger.css";
 import React, { useContext, useState, useRef } from "react";
-import { Conversation, Message, Navbar, NewConversationModal } from "../../components";
+import {
+  Conversation,
+  Message,
+  Navbar,
+  NewConversationModal,
+} from "../../components";
 import { AuthContext } from "../../context/AuthContext";
 import { useEffect } from "react";
 import axios from "axios";
 import io from "socket.io-client";
 import { Button } from "@material-ui/core";
+import AddCommentIcon from "@mui/icons-material/AddComment";
+
 const Messenger = ({ user, socket }) => {
   //const { user } = useContext(AuthContext);
   const [conversations, setConversations] = useState([]);
@@ -14,8 +21,8 @@ const Messenger = ({ user, socket }) => {
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [onlineFriend, setOnlineFriend] = useState([]);
+  const [newConversationButton, setNewConversationButton] = useState(false);
   const scrollRef = useRef();
-
 
   useEffect(() => {
     socket?.on("getMessage", (data) => {
@@ -109,8 +116,8 @@ const Messenger = ({ user, socket }) => {
 
   const handleNewConversation = (e) => {
     e.preventDefault();
-    return (<NewConversationModal/>);
-  }
+    setNewConversationButton(!newConversationButton);
+  };
 
   return (
     <>
@@ -118,12 +125,25 @@ const Messenger = ({ user, socket }) => {
       <div className="messenger-container">
         <div className="messenger-menu">
           <div className="messenger-menu-wrapper">
-          <button className="messenger-menu-add-btn" onClick={handleNewConversation}>New conversation</button>
-          <NewConversationModal/>
-            {/* <input
-              className="messenger-searchbar"
-              placeholder="Search friends"
-            /> */}
+            <div className="messenger-menu-new-conversation-btn-container">
+              <div className="messenger-menu-title">Chat</div>
+              <span
+                className="messenger-menu-add-btn"
+                alt="Start new conversation"
+                onClick={handleNewConversation}
+              >
+                <AddCommentIcon />
+              </span>
+              <span className="messenger-menu-add-btn-hover">
+                Start a new conversation
+              </span>
+            </div>
+            {newConversationButton && (
+              <NewConversationModal
+                setCurrentChat={setCurrentChat}
+                setConversations={setConversations}
+              />
+            )}
             {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
                 <Conversation

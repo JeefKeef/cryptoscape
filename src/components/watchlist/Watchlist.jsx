@@ -236,7 +236,6 @@ const Watchlist = ({ options }) => {
 
   const ProfileWatchlist = () => {
     return (
-      <>
         <List>
           Watchlist
           <div className="watchlist-searchbar">
@@ -279,7 +278,6 @@ const Watchlist = ({ options }) => {
               </div>
             ))}
         </List>
-      </>
     );
   };
 

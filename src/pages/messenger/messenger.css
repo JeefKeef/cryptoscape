@@ -5,7 +5,6 @@
 }
 
 .messsenger-menu {
-    flex: 5.5;
     background-color: purple;
 }
 
@@ -16,8 +15,8 @@
 }
 
 .messenger-chatbox {
-    flex: 5.5;
     background-color: green;
+    width: 100%;
 }
 
 .messenger-chatbox-wrapper {
@@ -53,4 +52,56 @@
     cursor: pointer;
     background-color: lightblue;
     color: white;
+}
+
+.messenger-menu-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0.8rem;
+}
+
+.messenger-menu-new-conversation-btn-container{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.messenger-menu-new-conversation-btn-container .messenger-menu-add-btn-hover {
+    visibility: hidden;
+    padding: 0.25em 0.5em;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 0.25em;
+    white-space: nowrap;
+    
+    /* Position the tooltip */
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transition-property: visibility;
+    transition-delay: 0s;
+}
+
+.messenger-menu-add-btn {
+    align-items: center;
+    color: #1DA1F2;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 6rem;
+}
+
+
+.messenger-menu-add-btn-hover {
+
+}
+
+.messenger-menu-add-btn:hover + .messenger-menu-add-btn-hover {
+    visibility: visible;
+    transition-delay: 1s;
 }
