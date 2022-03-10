@@ -4,12 +4,14 @@ import { Button } from "@material-ui/core";
 import { AuthContext } from "../../context/AuthContext";
 import { useEffect } from "react";
 import axios from "axios";
+import EditProfile from "../editProfile/EditProfile";
 
 const Profileinfo = ({ profile, socket }) => {
   const { user, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
     user.followings.includes(profile?._id)
   );
+  const [editProfileModal, setEditProfileModal] = useState(false);
 
   useEffect(() => {
     setFollowed(user?.followings.includes(profile?._id));
@@ -43,6 +45,10 @@ const Profileinfo = ({ profile, socket }) => {
       });
   };
 
+  const handleEditProfile = () => {
+    setEditProfileModal(!editProfileModal);
+  };
+
   return (
     <div className="profile-info-container">
       <div className="profile-info-top">
@@ -70,6 +76,11 @@ const Profileinfo = ({ profile, socket }) => {
             </button>
           )}
         </div>
+        <div className="profile-info-update-container">
+          <span className="profile-info-update" onClick={handleEditProfile}>
+            Edit profile
+          </span>
+        </div>
       </div>
       <div className="profile-info-middle">
         <div className="profile-about-text">About</div>
@@ -77,14 +88,20 @@ const Profileinfo = ({ profile, socket }) => {
       </div>
       <div className="profile-info-bottom">
         <div className="profile-info">
-          following: {profile?.followings?.length}
+          Following: {profile?.followings?.length}
         </div>
         <div className="profile-info">
-          followers: {profile?.followers?.length}
+          Followers: {profile?.followers?.length}
         </div>
       </div>
+      {editProfileModal && <EditProfile setEditProfileModal={setEditProfileModal}/>}
     </div>
   );
 };
 
 export default Profileinfo;
+
+//create popup modal to edit profile
+//when user click edit profile, display popupmodal
+//edit bio and profile picture
+//back and save button
