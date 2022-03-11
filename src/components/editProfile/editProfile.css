@@ -10,7 +10,7 @@
     bottom: 0;
     left: 0;
     width: 35%;
-    height: 70%;
+    height: 40%;
     z-index: 1;
 }
 
@@ -25,9 +25,14 @@
     cursor: pointer;
 }
 
+.edit-profile-modal-close:hover {
+    color: purple;
+}
+
 .edit-profile-modal-text {
     font-size: 20px;
     font-weight: bold;
+    padding-left: 1rem;
 }
 
 .edit-profile-modal-save {
@@ -44,6 +49,7 @@
 
 .edit-profile-modal-avatar {
     border-radius: 50%;
+    background-color: white;
     height: 100px;
     width: 100px;
     margin: 1rem;
@@ -54,12 +60,15 @@
     align-items: center;
 }
 
+.edit-profile-modal-avatar-label {
+    position: absolute;
+}
+
 .edit-profile-modal-avatar-add {
     border-radius: 50%;
     cursor: pointer;
     opacity: 0.5;
     color: silver;
-    position: absolute;
     background-color: black;
     padding: 0.6rem;
 }
@@ -70,15 +79,15 @@
 
 .edit-profile-modal-avatar-wrapper {
     display: flex;
-    position: relative;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .edit-profile-modal-bio-container {
     display: flex;
     flex-direction: column;
-    font-size: 20px;
+    font-size: 16px;
     color: silver;
     border: solid;
     border-width: thin;
@@ -90,7 +99,7 @@
 }
 
 .edit-profile-modal-bio-container:focus-within {
-    color: #1DA1F2;
+    color: purple;
 }
 
 .edit-profile-modal-bio-input {
@@ -98,10 +107,30 @@
     border: none;
     height: 5rem;
     resize: none;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .edit-profile-modal-bio-input:focus {
     outline: 0;
 }
 
+.edit-profile-modal-close-container {
+    display: flex;
+    align-items: center;
+}
+
+.edit-profile-img-container {
+    border-radius: 50%;
+    background-color: white;
+    height: 100px;
+    width: 100px;
+    margin: 1rem;
+}
+
+.avatar-img {
+    border-radius: 50%;
+    background-color: white;
+    height: 100px;
+    width: 100px;
+    margin: 1rem;
+}

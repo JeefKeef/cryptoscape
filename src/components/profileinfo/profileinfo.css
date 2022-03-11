@@ -17,3 +17,7 @@
     width: 6rem;
     text-align: center;
 }
+
+.profile-avatar {
+    background-color: white;
+}

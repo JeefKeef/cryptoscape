@@ -11,7 +11,9 @@ const Profileinfo = ({ profile, socket }) => {
   const [followed, setFollowed] = useState(
     user.followings.includes(profile?._id)
   );
+  
   const [editProfileModal, setEditProfileModal] = useState(false);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
     setFollowed(user?.followings.includes(profile?._id));
@@ -56,7 +58,7 @@ const Profileinfo = ({ profile, socket }) => {
           <img
             className="profile-avatar"
             src={
-              profile.profilePicture ||
+              PF + profile?.profilePicture ||
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
             }
             alt=""
@@ -76,11 +78,13 @@ const Profileinfo = ({ profile, socket }) => {
             </button>
           )}
         </div>
-        <div className="profile-info-update-container">
-          <span className="profile-info-update" onClick={handleEditProfile}>
-            Edit profile
-          </span>
-        </div>
+        {user.username === profile.username && (
+          <div className="profile-info-update-container">
+            <span className="profile-info-update" onClick={handleEditProfile}>
+              Edit profile
+            </span>
+          </div>
+        )}
       </div>
       <div className="profile-info-middle">
         <div className="profile-about-text">About</div>
@@ -94,7 +98,9 @@ const Profileinfo = ({ profile, socket }) => {
           Followers: {profile?.followers?.length}
         </div>
       </div>
-      {editProfileModal && <EditProfile setEditProfileModal={setEditProfileModal}/>}
+      {editProfileModal && (
+        <EditProfile setEditProfileModal={setEditProfileModal} />
+      )}
     </div>
   );
 };
