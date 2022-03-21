@@ -1,0 +1,23 @@
+.profile-info-top {
+    position: relative;
+}
+
+.profile-info-update-container {
+    background-color: black;
+    border: solid;
+    border-radius: 18px;
+    border-width: thin;
+    cursor: pointer;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+    padding: 0.7rem;
+    width: 6rem;
+    text-align: center;
+}
+
+.profile-avatar {
+    background-color: white;
+}

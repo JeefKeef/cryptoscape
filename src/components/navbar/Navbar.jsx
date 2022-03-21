@@ -21,6 +21,8 @@ const Navbar = ({ options, socket }) => {
   const { user, dispatch } = useContext(AuthContext);
   const [notifications, setNotifications] = useState([]);
   const [open, setOpen] = useState(false);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
 
   useEffect(() => {
     socket?.on("getNotification", (data) => {
@@ -186,7 +188,7 @@ const Navbar = ({ options, socket }) => {
           </MenuItem> */}
           <MenuItem className="menu-item">
             <Link to={"/messenger"}>
-              <Chat />
+              <Chat className="menu-item-chat"/>
               <span className="navbar-chat-badge"></span>
             </Link>
           </MenuItem>
@@ -199,10 +201,10 @@ const Navbar = ({ options, socket }) => {
             )}
           </MenuItem>
           <MenuItem className="menu-item">
-            <Link to={`/profile/${user.username}`}>
+            <Link to={`/profile/${user?.username}`}>
               <Avatar
                 src={
-                  user.profilePicture ||
+                  PF + user?.profilePicture ||
                   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                 }
                 alt=""

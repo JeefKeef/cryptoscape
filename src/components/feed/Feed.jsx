@@ -1,14 +1,24 @@
 import "./feed.css";
-import React, { useState, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  useCallback,
+} from "react";
 import { Share, Post, Profileinfo, Comment, Reply } from "../";
 import News from "../News";
 import { Avatar, Button } from "@material-ui/core";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Feed = ({ options, socket, comments, replies }) => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
+//  const [renderSize, setRenderSize] = useState(3);
+//  const [hasMore, setHasMore] = useState(true);
+
   const { user: currUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -17,6 +27,7 @@ const Feed = ({ options, socket, comments, replies }) => {
         options.value !== "home"
           ? await axios.get("/posts/profile/" + options.username)
           : await axios.get("/posts/timeline/" + currUser?._id);
+
       setPosts(
         res?.data.sort((p1, p2) => {
           return new Date(p2.createdAt) - new Date(p1.createdAt);
@@ -33,6 +44,23 @@ const Feed = ({ options, socket, comments, replies }) => {
     };
     fetchUser();
   }, [options.username]);
+
+  // useEffect(() => {
+  //   setRenderSize(renderSize);
+  // }, [renderSize]);
+
+  // const fetchMoreData = () => {
+  //   setRenderSize((prev) => {
+  //     if(prev + 3 < posts?.length) {
+  //       return prev + 3;
+  //     } else {
+  //       const diff = posts?.length;
+  //       setHasMore(!hasMore);
+  //       return prev + diff;
+  //     }
+  //   });
+  // };
+
 
   const renderSwitch = (params) => {
     switch (params) {
@@ -75,9 +103,22 @@ const Feed = ({ options, socket, comments, replies }) => {
     return (
       <>
         <Profileinfo profile={user} socket={socket} />
-        {posts?.map((post) => (
-          <Post key={post._id} post={post} socket={socket} />
-        ))}
+        {posts?.map((post) => {
+              return <Post key={post._id} post={post} socket={socket} />;
+            })}
+        {/* <div id="feed-scroll">
+          <InfiniteScroll
+            dataLength={posts?.length}
+            next={fetchMoreData}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+            scrollableTarget="feed-container"
+          >
+            {posts?.splice(0, renderSize)?.map((post, i) => {
+              return <Post key={post._id} post={post} socket={socket} />;
+            })}
+          </InfiniteScroll>
+        </div> */}
       </>
     );
   };

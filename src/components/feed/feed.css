@@ -1,8 +1,7 @@
 .feed-container {
     flex: 2;
     background-color: green;
-    overflow-y: scroll;
-    height: 100vh;
+    /* height: 100vh; */
     margin: 20px;
 }
 

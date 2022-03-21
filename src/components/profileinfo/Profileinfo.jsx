@@ -4,12 +4,16 @@ import { Button } from "@material-ui/core";
 import { AuthContext } from "../../context/AuthContext";
 import { useEffect } from "react";
 import axios from "axios";
+import EditProfile from "../editProfile/EditProfile";
 
 const Profileinfo = ({ profile, socket }) => {
   const { user, dispatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
     user.followings.includes(profile?._id)
   );
+  
+  const [editProfileModal, setEditProfileModal] = useState(false);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() => {
     setFollowed(user?.followings.includes(profile?._id));
@@ -37,10 +41,14 @@ const Profileinfo = ({ profile, socket }) => {
   const handleNotification = (type) => {
     !followed &&
       socket.emit("sendNotification", {
-        senderName: user.username,
-        receiverName: profile._id,
+        senderName: user?.username,
+        receiverName: profile?._id,
         type,
       });
+  };
+
+  const handleEditProfile = () => {
+    setEditProfileModal(!editProfileModal);
   };
 
   return (
@@ -50,15 +58,15 @@ const Profileinfo = ({ profile, socket }) => {
           <img
             className="profile-avatar"
             src={
-              profile.profilePicture ||
+              PF + profile?.profilePicture ||
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
             }
             alt=""
           ></img>
         </div>
         <div className="profile-name-container">
-          <div className="profile-name">{profile.username}</div>
-          {user.username !== profile.username && (
+          <div className="profile-name">{profile?.username}</div>
+          {user?.username !== profile?.username && (
             <button
               className="profile-follow-btn"
               onClick={() => {
@@ -70,6 +78,13 @@ const Profileinfo = ({ profile, socket }) => {
             </button>
           )}
         </div>
+        {user?.username === profile?.username && (
+          <div className="profile-info-update-container">
+            <span className="profile-info-update" onClick={handleEditProfile}>
+              Edit profile
+            </span>
+          </div>
+        )}
       </div>
       <div className="profile-info-middle">
         <div className="profile-about-text">About</div>
@@ -77,12 +92,15 @@ const Profileinfo = ({ profile, socket }) => {
       </div>
       <div className="profile-info-bottom">
         <div className="profile-info">
-          following: {profile?.followings?.length}
+          Following: {profile?.followings?.length}
         </div>
         <div className="profile-info">
-          followers: {profile?.followers?.length}
+          Followers: {profile?.followers?.length}
         </div>
       </div>
+      {editProfileModal && (
+        <EditProfile setEditProfileModal={setEditProfileModal} />
+      )}
     </div>
   );
 };
