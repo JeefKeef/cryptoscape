@@ -41,8 +41,8 @@ const Profileinfo = ({ profile, socket }) => {
   const handleNotification = (type) => {
     !followed &&
       socket.emit("sendNotification", {
-        senderName: user.username,
-        receiverName: profile._id,
+        senderName: user?.username,
+        receiverName: profile?._id,
         type,
       });
   };
@@ -65,8 +65,8 @@ const Profileinfo = ({ profile, socket }) => {
           ></img>
         </div>
         <div className="profile-name-container">
-          <div className="profile-name">{profile.username}</div>
-          {user.username !== profile.username && (
+          <div className="profile-name">{profile?.username}</div>
+          {user?.username !== profile?.username && (
             <button
               className="profile-follow-btn"
               onClick={() => {
@@ -78,7 +78,7 @@ const Profileinfo = ({ profile, socket }) => {
             </button>
           )}
         </div>
-        {user.username === profile.username && (
+        {user?.username === profile?.username && (
           <div className="profile-info-update-container">
             <span className="profile-info-update" onClick={handleEditProfile}>
               Edit profile
@@ -106,8 +106,3 @@ const Profileinfo = ({ profile, socket }) => {
 };
 
 export default Profileinfo;
-
-//create popup modal to edit profile
-//when user click edit profile, display popupmodal
-//edit bio and profile picture
-//back and save button

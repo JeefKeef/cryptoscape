@@ -49,8 +49,8 @@ const AuthReducer = (state, action) => {
         ...state,
         user: {
           ...state.user,
-          desc: action.payload.desc,
-          profilePicture: action.payload.profilePicture
+          desc: action?.payload?.desc,
+          profilePicture: action?.payload?.profilePicture
         },
       };
     default:

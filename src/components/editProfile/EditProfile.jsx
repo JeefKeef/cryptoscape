@@ -20,6 +20,9 @@ const EditProfile = ({ setEditProfileModal }) => {
       const newProfile = {
         desc: document.getElementsByClassName("edit-profile-modal-bio-input")[0]
           .value,
+        profilePicture:
+          currUser?.profilePicture ||
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
       };
 
       if (file) {
@@ -42,6 +45,7 @@ const EditProfile = ({ setEditProfileModal }) => {
         userId: currUser?._id,
       });
       dispatch({ type: "UPDATEPROFILE", payload: newProfile });
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
@@ -100,5 +104,3 @@ const EditProfile = ({ setEditProfileModal }) => {
 };
 
 export default EditProfile;
-
-//fix async profile picture upload profile info,  navbar, state
