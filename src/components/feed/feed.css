@@ -1,8 +1,8 @@
 .feed-container {
-    flex: 2;
+    flex: 3;
     background-color: green;
     /* height: 100vh; */
-    margin: 20px;
+    margin: 10px;
 }
 
 .profile-info-container {

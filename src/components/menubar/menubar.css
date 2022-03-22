@@ -1,0 +1,78 @@
+.menubar-container {
+    display: flex;
+    height: 100%;
+    width: 12%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #2f3740;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    filter: drop-shadow(0 1px 10px rgba(0, 0, 0, 0.8));
+}
+
+.logo-container {
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    margin: 1rem;
+}
+
+.logo-container a:link, a:visited {
+    font-size: 1.5rem;
+    color: rgb(228, 228, 228);
+    text-decoration: none;
+}
+
+.logo-container a:hover {
+    color: white;
+}
+
+.menubar-item a {
+    margin: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.menubar-item a:link, a:visited{
+    color: rgb(228, 228, 228);
+    text-decoration: none;
+    padding: 0px 0px 0px 0px;
+}
+
+.menubar-item a:hover {
+    color: white;
+}
+
+.menubar-logout-container {
+    position: absolute;
+    bottom: 10%;
+    margin: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+.menubar-logout-container a:link, a:visited{
+    display: flex;
+    align-items: center;
+    color: rgb(228, 228, 228);
+    text-decoration: none;
+    padding: 0px 0px 0px 0px;
+}
+
+#menubar-logout-icon:hover {
+    color: red;
+    width: 2rem;
+    height: 2rem;
+}
+
+.menubar-logout-text {
+    margin-left: 1rem;
+}
+
+
+
+
+

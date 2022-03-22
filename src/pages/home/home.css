@@ -1,9 +1,12 @@
-.homeContainer {
+.homepage-container {
     display: flex;
-    width: 70%;
-    height: 100vh;
-    text-align: center;
-    margin: 0 auto;
-    padding: 10px;
-    background-color: brown;
+    height: 100%;
+    background-color: #262d37;
+    margin-left: 13.5%;
+    padding: 1rem;
+}
+
+.homepage-layout {
+    display: flex;
+    margin-top: 5rem;
 }

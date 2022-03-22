@@ -1,10 +1,11 @@
 .watchlist-container {
-    background-color: purple;
-    flex: 1.5;
+    background-color: #2f3740;
+    flex: 1.2;
     overflow-y: scroll;
-    height: 50%;
-    margin: 20px;
+    height: 50vh;
+    margin: 10px;
     text-align: center;
+    border-radius: 10px;
 }
 
 .watchlist-searchbar {
@@ -19,7 +20,6 @@
 }
 
 .watchlist-search-icon {
-    
 }
 
 .watchlist-trash-container {
@@ -28,20 +28,28 @@
     justify-content: space-between;
 }
 
+.watchlist-trash-container:hover {
+    background-color: silver;
+}
+
 .watchlist-card-delete {
     width: 2rem;
     height: 2rem;
 }
 
+.watchlist-card-delete:hover {
+    color: red;
+}
 
 ::-webkit-scrollbar {
-    width:5px;
+    width:10px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: white;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px     rgba(0,0,0,0.3); 
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: silver;
+    border-radius: 10px;
 }
