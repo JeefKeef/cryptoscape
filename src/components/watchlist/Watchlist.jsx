@@ -31,7 +31,7 @@ import {
 
 import { StackedLineChartOutlined } from "@mui/icons-material";
 
-import { Button, Input } from "@material-ui/core";
+import { Button, Input, Paper } from "@material-ui/core";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -263,6 +263,9 @@ const Watchlist = ({ options }) => {
               )}
               // onChange={(coin) => console.log(coin.target.innerText)}
               onChange={(coin) => setSearchTerm(coin.target.innerText)}
+              PaperComponent={({ children }) => (
+                <Paper id="watchlist-list" style={{ background: "#1A1A1B", color:"white" }}>{children}</Paper>
+              )}
             />
           </div>
           {currUser &&

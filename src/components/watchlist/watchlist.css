@@ -1,11 +1,13 @@
 .watchlist-container {
     background-color: #2f3740;
-    flex: 1.2;
     overflow-y: scroll;
     height: 50vh;
+    width: 14%;
     margin: 10px;
     text-align: center;
     border-radius: 10px;
+    position: fixed;
+    color: white;
 }
 
 .watchlist-searchbar {
@@ -20,6 +22,7 @@
 }
 
 .watchlist-search-icon {
+    color: white;
 }
 
 .watchlist-trash-container {
@@ -42,7 +45,7 @@
 }
 
 ::-webkit-scrollbar {
-    width:10px;
+    width:5px;
 }
 
 ::-webkit-scrollbar-track {

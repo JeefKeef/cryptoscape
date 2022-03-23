@@ -6,6 +6,7 @@ import AddCommentIcon from "@mui/icons-material/AddComment";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import moment from 'moment';
 
 const Post = ({ post, socket }) => {
   const [like, setLike] = useState(post?.likes?.length);
@@ -37,7 +38,8 @@ const Post = ({ post, socket }) => {
   };
 
   const handleNotifcation = (type) => {
-    !isLiked && currentUser?._id !== post?.userId &&
+    !isLiked &&
+      currentUser?._id !== post?.userId &&
       socket.emit("sendNotification", {
         senderName: currentUser?.username,
         receiverName: post?.userId,
@@ -61,14 +63,16 @@ const Post = ({ post, socket }) => {
               />
             </Link>
           </div>
-          <Link
-            to={`/profile/${user?.username}`}
-            style={{ textDecoration: "none" }}
-          >
-            <Typography className="post-user-name">{user?.username}</Typography>
-          </Link>
+          <div className="post-username-time-container">
+            <Link
+              to={`/profile/${user?.username}`}
+              style={{ textDecoration: "none" }}
+            >
+              <text className="post-user-name">{user?.username}</text>
+            </Link>
 
-          <span className="post-time">{post?.createdAt}</span>
+            <span className="post-time">{moment(post?.createdAt).fromNow()}</span>
+          </div>
         </div>
         <div className="post-middle">
           <span className="post-text">{post?.desc}</span>
@@ -77,21 +81,27 @@ const Post = ({ post, socket }) => {
         <div className="post-bottom">
           <div className="post-options">
             <Link to={"/post/" + post?._id} style={{ textDecoration: "none" }}>
-              <Button className="post-comment-btn">
-                <AddCommentIcon />
-                <span className="post-comment-counter">{post?.comments?.length !== 0 && post?.comments?.length}</span>
-              </Button>
+              <div className="post-comment-container">
+                <button className="post-comment-btn">
+                  <AddCommentIcon />
+                </button>
+                <span className="post-comment-counter">
+                  {post?.comments?.length !== 0 && post?.comments?.length}
+                </span>
+              </div>
             </Link>
-            <Button
-              className="post-like-btn"
-              onClick={() => {
-                likedHandler();
-                handleNotifcation("liked");
-              }}
-            >
-              <ThumbUpIcon />
+            <div className="post-like-container">
+              <button
+                className="post-like-btn"
+                onClick={() => {
+                  likedHandler();
+                  handleNotifcation("liked");
+                }}
+              >
+                <ThumbUpIcon />
+              </button>
               <span className="post-like-counter">{like !== 0 && like}</span>
-            </Button>
+            </div>
           </div>
         </div>
       </div>

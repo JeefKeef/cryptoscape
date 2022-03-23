@@ -1,8 +1,10 @@
 .feed-container {
-    flex: 3;
-    background-color: green;
-    /* height: 100vh; */
+    background-color: #2f3740;
+    border-radius: 10px;
     margin: 10px;
+    margin-left: 18%;
+    max-width: 600px;
+    word-wrap: break-word;
 }
 
 .profile-info-container {

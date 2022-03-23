@@ -54,7 +54,7 @@ const News = ({ simplified }) => {
         <div className="news-box-wrapper">
           <div className="news-card-container">
             {cryptoNews?.value.map((news) => (
-              <Card className="news-card">
+              <Card className="news-card" style={{backgroundColor:"#1A1A1B"}}>
                 <a href={news?.url} target="_blank" rel="noreferrer" style={{textDecoration:"none"}}>
                   <CardContent className="news-content">
                     <div className="news-image-container">
@@ -73,14 +73,14 @@ const News = ({ simplified }) => {
                       <div className="news-provider-wrapper">
                         <div className="news-provider-icon">
                           <Avatar
-                            sx={{ width: 40, height: 40 }}
+                            sx={{ width: 30, height: 30 }}
                             src={
                               news?.provider[0]?.image?.thumbnail?.contentUrl
                             }
                             alt={news?.provider[0]?.name}
                           />
                         </div>
-                        <div>
+                        <div className="news-timestamp-container">
                           <span className="news-timestamp">
                             {moment(news?.datePublished)
                               .startOf("ss")

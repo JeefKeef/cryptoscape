@@ -30,7 +30,7 @@
 #navbar-right {
     display: flex;
     position: absolute;
-    right: 0;
+    right: 4rem;
 }
 
 .menu-container {

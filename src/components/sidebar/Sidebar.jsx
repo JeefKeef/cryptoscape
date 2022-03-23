@@ -3,10 +3,10 @@ import { News } from "../";
 import React from "react";
 
 const Sidebar = ({ options }) => {
-
   const NewsSidebar = () => {
     return (
       <>
+        News
         <News simplified />
         <div className="footer">
           Cryptoscape <br />
@@ -28,7 +28,7 @@ const Sidebar = ({ options }) => {
   return (
     <div className="sidebar-container">
       <div className="sidebar-wrapper">
-        {options.user ? <NewsSidebar/> : <NoSidebar/>}
+        {options.user ? <NewsSidebar /> : <NoSidebar />}
       </div>
     </div>
   );
