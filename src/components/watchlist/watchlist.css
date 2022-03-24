@@ -1,5 +1,5 @@
 .watchlist-container {
-    background-color: #2f3740;
+    background-color: #1A1A1B;
     overflow-y: scroll;
     height: 50vh;
     width: 14%;
@@ -8,6 +8,7 @@
     border-radius: 10px;
     position: fixed;
     color: white;
+    font-weight: bold;
 }
 
 .watchlist-searchbar {
@@ -22,7 +23,7 @@
 }
 
 .watchlist-search-icon {
-    color: white;
+    color: #696B6B;
 }
 
 .watchlist-trash-container {
@@ -32,7 +33,11 @@
 }
 
 .watchlist-trash-container:hover {
-    background-color: silver;
+    background-color: #272729;
+}
+
+.watchlist-card-delete-btn {
+    color: #696B6B;
 }
 
 .watchlist-card-delete {
@@ -40,7 +45,7 @@
     height: 2rem;
 }
 
-.watchlist-card-delete:hover {
+.watchlist-card-delete-btn:hover {
     color: red;
 }
 

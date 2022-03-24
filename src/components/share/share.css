@@ -67,6 +67,6 @@
 }
 
 .share-img:hover {
+    background-color: #272729;
     border-radius: 5px;
-    background-color: rgba(128, 0, 128, 0.3);
 }

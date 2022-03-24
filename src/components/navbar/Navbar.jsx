@@ -170,7 +170,7 @@ const Navbar = ({ options, socket }) => {
               </Link>
             </MenuItem>
             <MenuItem className="menu-item" onClick={() => setOpen(!open)}>
-              <Notifications className="navbar-notification"/>
+              <Notifications className="navbar-notification" />
               {notifications.length > 0 && (
                 <span className="navbar-notification-badge">
                   {notifications.length}
@@ -180,6 +180,7 @@ const Navbar = ({ options, socket }) => {
             <MenuItem className="menu-item">
               <Link to={`/profile/${user?.username}`}>
                 <Avatar
+                  className="navbar-profile-icon"
                   src={
                     PF + user?.profilePicture ||
                     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"

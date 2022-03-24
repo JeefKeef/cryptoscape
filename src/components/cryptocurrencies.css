@@ -1,22 +1,30 @@
 .crypto-container {
-}
-
-
-.crypto-card-container {
-    background-color: brown;
-    justify-content: center;
+    color: white;
+    background-color: #1A1A1B;
+    height: 40vh;
+    width: 20%;
+    margin: 10px;
+    text-align: center;
+    border-radius: 10px;
+    position: fixed;
+    right: 12%;
+    bottom: 1rem;
     display: flex;
+}
+.crypto-card-container {
+    display: flex;
+    justify-content: center;
 }
 
 .crypto-card-content {
-    display: flex;
+    flex:1;
 }
 
 .crypto-card {
     display: flex;
     position: relative;
     height: 60px;
-    width: fit-content;
+    width: 100%;
     margin: 2px;
 }
 

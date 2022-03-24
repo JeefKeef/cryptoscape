@@ -55,6 +55,7 @@ const Post = ({ post, socket }) => {
             <Link to={`/profile/${user?.username}`}>
               <img
                 className="post-avatar"
+                loading="lazy"
                 src={
                   PF + user?.profilePicture ||
                   "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"

@@ -7,15 +7,14 @@ import {
   Sidebar,
   WatchList,
   Friendsbar,
+  GlobalStats,
 } from "../../components";
 
 const Home = ({ user, socket, guest }) => {
   return (
     <div className="homepage-container">
       <div className="homepage-layout">
-          <WatchList
-            options={user ? { value: "profile" } : { value: "guest" }}
-          />
+        <WatchList options={user ? { value: "profile" } : { value: "guest" }} />
         <Feed
           options={
             user
@@ -24,7 +23,10 @@ const Home = ({ user, socket, guest }) => {
           }
           socket={socket}
         />
-        {user ? <Sidebar options={{ user: user.username }} /> : <></>}
+        <div>
+          {user ? <Sidebar options={{ user: user.username }} /> : <></>}
+          <Cryptocurrencies simplified />
+        </div>
         {user ? <Friendsbar user={user} /> : <></>}
       </div>
 

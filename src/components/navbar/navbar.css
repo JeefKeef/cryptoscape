@@ -20,7 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #2f3740;
+    background-color: #1A1A1B;
     height: 8%;
     width: 100%;
     position: fixed;
@@ -56,6 +56,7 @@
 }
 
 .menu-search-icon {
+    color: #696B6B;
     padding: 7px;
 }
 
@@ -63,23 +64,46 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #262d37;
+    background-color: #272729;
     padding: 7px;
     border-radius: 8px;
 }
 
-/* .menu-item-chat {
-    margin: 10px;
+.menu-item-chat {
+    color: white;
+    padding: 0.5rem;
+}
+
+.menu-item-chat:hover {
+    background-color: #272729;
+    border-radius: 5px;
 }
 
 .navbar-notification {
-    margin: 10px;
-} */
+    color: white;
+    padding: 0.5rem;
+}
 
+.navbar-notification:hover {
+    background-color: #272729;
+    border-radius: 5px;
+}
+
+.navbar-profile-icon {
+    border: solid;
+    border-color: transparent;
+    border-width: thin;
+}
+
+.navbar-profile-icon:hover {
+    border-color: white;
+    border-width: thin;
+}
 .searchInput {
     border-radius: 5px;
-    background-color: #262d37;
+    background-color: #272729;
     border: none;
+    color: white;
     outline: none;
     width: 600px;
     height: 1rem;

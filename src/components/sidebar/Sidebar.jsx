@@ -1,16 +1,16 @@
 import "./sidebar.css";
 import { News } from "../";
 import React from "react";
+import { fontWeight } from "@mui/system";
 
 const Sidebar = ({ options }) => {
   const NewsSidebar = () => {
     return (
       <>
-        News
-        <News simplified />
-        <div className="footer">
+        <text style={{ fontWeight: "bold" }}>News</text> <News simplified />
+        {/* <div className="footer">
           Cryptoscape <br />
-        </div>
+        </div> */}
       </>
     );
   };

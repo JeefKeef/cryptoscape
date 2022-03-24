@@ -54,7 +54,7 @@ const News = ({ simplified }) => {
         <div className="news-box-wrapper">
           <div className="news-card-container">
             {cryptoNews?.value.map((news) => (
-              <Card className="news-card" style={{backgroundColor:"#1A1A1B"}}>
+              <Card className="news-card" style={{backgroundColor:"#1A1A1B", boxShadow:"none"}}>
                 <a href={news?.url} target="_blank" rel="noreferrer" style={{textDecoration:"none"}}>
                   <CardContent className="news-content">
                     <div className="news-image-container">

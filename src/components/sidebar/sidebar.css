@@ -13,12 +13,14 @@
 
 .sidebar-container {
     color: white;
-    background-color: #2f3740;
+    background-color: #1A1A1B;
     height: fit-content;
-    width: 30%;
+    width: 20%;
     margin: 10px;
     text-align: center;
     border-radius: 10px;
+    position: fixed;
+    right: 12%;
 }
 
 .sidebar-wrapper {

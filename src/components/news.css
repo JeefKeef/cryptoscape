@@ -1,5 +1,4 @@
 .news-container {
-    background-color: black;
     border-radius: 10px;
 }
 
@@ -16,7 +15,6 @@
 }
 
 .news-box-wrapper {
-    padding: 10px;
 }
 
 .news-card-container {
@@ -34,6 +32,7 @@
 
 
 .news-title-container {
+    font-weight: bold;
     text-align: left;
     padding: 7px;
 }
@@ -45,11 +44,10 @@
 
 .news-content {
     display: flex;
-    background-color: #1A1A1B;
 }
 
 .news-content:hover {
-    filter: brightness(110%);
+    background-color: #272729;
 }
 
 .news-image-container {

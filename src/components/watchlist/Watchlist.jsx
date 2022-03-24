@@ -264,7 +264,7 @@ const Watchlist = ({ options }) => {
               // onChange={(coin) => console.log(coin.target.innerText)}
               onChange={(coin) => setSearchTerm(coin.target.innerText)}
               PaperComponent={({ children }) => (
-                <Paper id="watchlist-list" style={{ background: "#1A1A1B", color:"white" }}>{children}</Paper>
+                <Paper id="watchlist-list" style={{ background: "#272729", color:"white" }}>{children}</Paper>
               )}
             />
           </div>
@@ -274,6 +274,7 @@ const Watchlist = ({ options }) => {
                 <WatchlistCard cryptoId={coinId} />
                 <IconButton className="watchlist-card-delete">
                   <Delete
+                    className="watchlist-card-delete-btn"
                     fontSize="small"
                     onClick={() => handleDelete(coinId)}
                   />
