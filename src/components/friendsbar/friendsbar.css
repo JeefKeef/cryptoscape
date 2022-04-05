@@ -1,25 +1,39 @@
 .friendsbar-container {
-    flex: 1;
-    background-color: green;
-    height: 300px;
+    color: white;
+    background-color: #1A1A1B;
+    height: fit-content;
+    max-height: 90vh;
+    overflow-y: scroll;
+    width: 200px;
     padding: 7px;
+    margin: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+    position: fixed;
+    right: 0;
 }
 
 .friendsbar-card {
     display: flex;
     width: 100%;
-    background-color: red;
     align-items: center;
+    justify-content: flex-start;
+}
+
+.friendsbar-card:hover {
+    background-color: #272729;
+    border-radius: 5px;
 }
 
 .friendsbar-avatar {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    margin-right: 7px;
+    margin-right: 1rem;
 }
 
 .friendsbar-name {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
 }

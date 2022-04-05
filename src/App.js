@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 //import { Routes, Route, Link } from "react-router-dom";
 import { io } from "socket.io-client";
-import { Navbar, PostDetails, ReplyComment } from "./components";
+import { Menubar, Navbar, PostDetails, ReplyComment } from "./components";
 
 // import {
 //   //Navbar,
@@ -54,49 +54,70 @@ const App = () => {
   console.log(userState);
 
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={userState ? <Home user={userState} socket={socket} /> : <Home guest />}
-        />
-        <Route path="/login" element={userState ? <Navigate to="/" /> : <Login />} />
-        <Route
-          path="/register"
-          element={userState ? <Navigate to="/" /> : <Register />}
-        />
-        <Route
-          path="/profile/:username"
-          element={
-            !userState ? (
-              <Navigate to="/" />
-            ) : (
-              <Profile user={userState} socket={socket} />
-            )
-          }
-        />
-        <Route
-          path="/messenger"
-          element={
-            !userState ? (
-              <Navigate to="/" />
-            ) : (
-              <Messenger user={userState} socket={socket} />
-            )
-          }
-        />
-        <Route path="/crypto/:coinId" element={<CryptoDetails />} />
-        <Route path="/post/:postId" element={<CommentPage socket={socket} />} />
-        <Route
-          path="/reply/:commentId"
-          element={<ReplyPage socket={socket} />}
-        />
-        <Route
-          path="/reply/:commentId/reply/:replyId"
-          element={<ReplyPage socket={socket} />}
-        />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <div className="user-ui-container">
+          <Navbar id="navbar-component"
+            options={user ? { value: "profile" } : { value: "guest" }}
+            socket={socket}
+          />
+          <Menubar id="menubar-component"/>
+        </div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              userState ? (
+                <Home user={userState} socket={socket} />
+              ) : (
+                <Home guest />
+              )
+            }
+          />
+          <Route
+            path="/login"
+            element={userState ? <Navigate to="/" /> : <Login />}
+          />
+          <Route
+            path="/register"
+            element={userState ? <Navigate to="/" /> : <Register />}
+          />
+          <Route
+            path="/profile/:username"
+            element={
+              !userState ? (
+                <Navigate to="/" />
+              ) : (
+                <Profile user={userState} socket={socket} />
+              )
+            }
+          />
+          <Route
+            path="/messenger"
+            element={
+              !userState ? (
+                <Navigate to="/" />
+              ) : (
+                <Messenger user={userState} socket={socket} />
+              )
+            }
+          />
+          <Route path="/crypto/:coinId" element={<CryptoDetails />} />
+          <Route
+            path="/post/:postId"
+            element={<CommentPage socket={socket} />}
+          />
+          <Route
+            path="/reply/:commentId"
+            element={<ReplyPage socket={socket} />}
+          />
+          <Route
+            path="/reply/:commentId/reply/:replyId"
+            element={<ReplyPage socket={socket} />}
+          />
+        </Routes>
+      </Router>
+    </>
 
     // <div className="app">
     //   <div className="navbar">

@@ -1,41 +1,42 @@
 .post-container {
-    width: 90%;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
     margin: 0 auto;
+    border-bottom: 1px solid;
 }
 
 .post-wrapper {
-    padding: 10px;
+    padding: 1rem;
 }
 
 .post-top {
     display: flex;
-    align-items: center;
 }
 
 .post-avatar-container {
-    padding: 7px;
 }
 
 .post-avatar {
-    width: 30px;
-    height: 30px;
-    border: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .post-user-name {
-    padding: 7px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 1rem;
 }
 
 .post-time {
-    font-size: x-small;
-    padding: 7px;
+    color: silver;
+    font-size: small;
+    padding-left: 7px;
 }
 
 .post-middle {
-    width: 100%;
+    color: white;
+    margin-left: 4rem;
+    padding: 0rem 0.5rem 0.5rem 0rem;
 }
 
 .post-img {
@@ -45,7 +46,7 @@
 }
 
 .post-bottom {
-    width: 100%;
+    margin-left: 3.5rem;
 }
 
 .post-options {
@@ -53,20 +54,77 @@
     align-items: center;
 }
 
+.post-like-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* .post-like-container:hover .post-like-counter {
+    color:#272729;
+}
+
+.post-like-container:hover .post-like-btn{
+    border-radius: 5px;
+    background-color: #272729;
+} */
+
 .post-like-btn {
-    padding: 7px;
+    color: white;
+    border:none;
+    background-color: transparent;
+    cursor: pointer;
+    outline:none;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.post-like-btn:hover {
+    background-color: #272729;
+    border-radius: 5px;
 }
 
 .post-like-counter {
+    color: white;
     font-size: 12px;
-    padding: 7px;
 }
 
+.post-comment-container {
+    display: flex;
+    align-items: center;
+}
+
+/* .post-comment-container:hover .post-comment-counter {
+    color:#272729;
+}
+
+.post-comment-container:hover .post-comment-btn{
+    border-radius: 5px;
+    background-color: #272729;
+} */
+
+
 .post-comment-btn {
-    padding: 5px;
+    color: white;
+    border:none;
+    background-color: transparent;
+    cursor: pointer;
+    outline:none;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.post-comment-btn:hover {
+    background-color: #272729;
+    border-radius: 5px;
 }
 
 .post-comment-counter {
+    color: white;
     font-size: 12px;
-    padding: 5px;
+    margin-right: 2rem;
+}
+
+.post-text {
+    font-size: 18px;
 }

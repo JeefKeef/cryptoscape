@@ -69,8 +69,9 @@ const Share = ({ setPosts, socket }) => {
               "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
             }
             className="share-profile-img"
+            sx={{ height: '55px', width: '55px' }}
           ></Avatar>
-          <input placeholder="Create Post" className="share-input" ref={desc} />
+          <textarea placeholder="Create Post" className="share-input" ref={desc} />
           {file && (
             <div className="share-img-container">
               <img
@@ -88,7 +89,8 @@ const Share = ({ setPosts, socket }) => {
         <div className="share-bottom">
           <form className="share-options" onSubmit={submitHandler}>
             <button className="share-btn">
-              <AddCircleOutlineRoundedIcon />
+              Post
+              {/* <AddCircleOutlineRoundedIcon /> */}
             </button>
             <label htmlFor="file" className="share-img">
               <AddPhotoAlternateRoundedIcon />

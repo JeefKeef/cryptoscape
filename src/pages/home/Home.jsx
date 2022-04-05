@@ -6,15 +6,33 @@ import {
   Navbar,
   Sidebar,
   WatchList,
-  Friendsbar
+  Friendsbar,
+  GlobalStats,
 } from "../../components";
 
 const Home = ({ user, socket, guest }) => {
   return (
-    <div>
-      <Navbar options={user ? { value: "profile"} : { value: "guest" }} socket={socket}/>
-      <Cryptocurrencies simplified />
-      <div className="homeContainer">
+    <div className="homepage-container">
+      <div className="homepage-layout">
+        <WatchList options={user ? { value: "profile" } : { value: "guest" }} />
+        <Feed
+          options={
+            user
+              ? { value: "home", username: user.username }
+              : { value: "guest" }
+          }
+          socket={socket}
+        />
+        <div>
+          {user ? <Sidebar options={{ user: user.username }} /> : <></>}
+          <Cryptocurrencies simplified />
+        </div>
+        {user ? <Friendsbar user={user} /> : <></>}
+      </div>
+
+      {/* <Navbar options={user ? { value: "profile"} : { value: "guest" }} socket={socket}/> */}
+      {/* <Cryptocurrencies simplified /> */}
+      {/* <div className="homeContainer">
         <WatchList options={user ? { value: "profile" } : { value: "guest" }} />
         <Feed
           options={
@@ -26,7 +44,7 @@ const Home = ({ user, socket, guest }) => {
         />
         {user ? <Sidebar options={{user:user.username}}/> : <></>}
         {user ? <Friendsbar user={user}/> : <></>}
-      </div>
+      </div> */}
     </div>
   );
 };

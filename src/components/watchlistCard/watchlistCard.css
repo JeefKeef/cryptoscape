@@ -3,8 +3,8 @@
     align-items: center;
     padding: 0.5rem;
     width: 100%;
+    color: white;
 }
-
 .watchlist-card-img {
     height: 2rem;
     width: 2rem;

@@ -1,12 +1,14 @@
 .feed-container {
-    flex: 2;
-    background-color: green;
-    /* height: 100vh; */
-    margin: 20px;
+    background-color: #1A1A1B;
+    border-radius: 10px;
+    margin: 10px;
+    margin-left: 50%;
+    max-width: 650px;
+    word-wrap: break-word;
 }
 
 .profile-info-container {
-    background-color: blue;
+    background-color: #1A1A1B;
     padding: 7px;
 }
 
