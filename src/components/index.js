@@ -22,4 +22,3 @@ export { default as Reply } from "./reply/Reply";
 export { default as NewConversationModal } from "./newConversationModal/NewConversationModal";
 export { default as EditProfile } from "./editProfile/EditProfile";
 export { default as Menubar } from "./menubar/Menubar";
-export { default as GlobalStats } from "./globalStats/GlobalStats";

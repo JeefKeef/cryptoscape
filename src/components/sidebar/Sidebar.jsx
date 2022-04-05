@@ -35,3 +35,5 @@ const Sidebar = ({ options }) => {
 };
 
 export default Sidebar;
+
+//add crypto sidebar
